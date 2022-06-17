@@ -2,18 +2,22 @@
 import { css } from "@emotion/react";
 import { search, user } from "../../../public/images";
 
-const Header = () => {
+interface HeaderProps {
+  setModalState: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Header = ({ setModalState }: HeaderProps) => {
   return (
     <nav css={backgroundStyle}>
       <div css={linkStyle}>
         <span>V</span>o<span>T</span>ic
       </div>
       <form>
-        <input css={inputStyle} type="text" placeholder="Search Vote" />
+        <input css={inputStyle} type="text" placeholder="검색" />
         <img css={inputIcon} src={`${search.src}`} alt="" />
       </form>
-      <div css={userStyle}>
-        <span>{false ? "username" : "Sign In"}</span>
+      <div css={userStyle} onClick={() => setModalState("login")}>
+        <span>로그인</span>
         <img css={userIcon} src={`${user.src}`} alt="user" />
       </div>
     </nav>
