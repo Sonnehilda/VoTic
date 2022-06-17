@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { css } from "@emotion/react";
 import { useRef } from "react";
+import { vote } from "../../../public/images";
 
 interface ListProps {
   type: string;
@@ -21,7 +22,7 @@ const List = ({ type }: ListProps) => {
 
   const scrollNext = (refObj: React.MutableRefObject<HTMLDivElement>) => {
     if (
-      refObj.current.scrollLeft ===
+      Math.ceil(refObj.current.scrollLeft) ===
       refObj.current.scrollWidth - refObj.current.clientWidth
     )
       refObj.current.scrollTo({
@@ -140,6 +141,7 @@ const List = ({ type }: ListProps) => {
                     <span>{v.creator}</span>
                   </div>
                   <div css={contentInfo}>
+                    <img css={statusIcon} src={vote.src} alt="" />
                     <span>{v.status}</span>
                     <span>{v.date}</span>
                   </div>
@@ -179,6 +181,7 @@ const List = ({ type }: ListProps) => {
                     <span>{v.creator}</span>
                   </div>
                   <div css={contentInfo}>
+                    <img css={statusIcon} src={vote.src} alt="" />
                     <span>{v.status}</span>
                     <span>{v.date}</span>
                   </div>
@@ -214,7 +217,7 @@ const backgroundStyle = css`
   padding-right: 1%;
 
   width: 100%;
-  height: 15rem;
+  height: 16rem;
 `;
 
 const titleStyle = css`
@@ -268,7 +271,7 @@ const contentBackground = css`
   margin-right: 0.5rem;
 
   width: 20rem;
-  height: 11.5rem;
+  height: 12.5rem;
   border-radius: 0.5rem;
 
   display: inline-block;
@@ -330,10 +333,18 @@ const contentInfo = css`
   }
 `;
 
+const statusIcon = css`
+  margin-top: 0.1rem;
+  margin-right: 0.25rem;
+
+  width: 0.75rem;
+  height: 0.75rem;
+`;
+
 const scrollWrapper = css`
   position: absolute;
 
-  transform: translateY(-12.5rem);
+  transform: translateY(-13.5rem);
 
   margin-top: 0.5rem;
 
@@ -349,7 +360,7 @@ const scrollStyle = css`
   background-color: #efefef;
 
   width: 3%;
-  height: 12rem;
+  height: 13rem;
 
   display: flex;
   justify-content: center;
