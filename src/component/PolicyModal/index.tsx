@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { useRef, useState } from "react";
+import { discretion, purpose } from "./constant";
 
 interface LoginModalProps {
   setModalState: React.Dispatch<React.SetStateAction<string>>;
@@ -24,6 +25,12 @@ const PolicyModal = ({ setModalState }: LoginModalProps) => {
           <span onClick={() => setModalState("login")}>←</span>
         </div>
 
+        <div css={phraseWrapper}>
+          <p>{purpose[0]}</p>
+          <p>{purpose[1]}</p>
+          <p>{purpose[2]}</p>
+        </div>
+
         <div css={titleWrapper}>
           <span>수집 항목</span>
           <span>수집 목적</span>
@@ -43,14 +50,14 @@ const PolicyModal = ({ setModalState }: LoginModalProps) => {
         </div>
 
         <div css={phraseWrapper}>
-          <p>개인정보 수집 및 이용에 대해서는 거부할 수 있으며,</p>
-          <p>거부 시에는 회원가입이 불가합니다.</p>
+          <p>{discretion[0]}</p>
+          <p>{discretion[1]}</p>
           <br />
-          <p>서비스 제공을 위해서 반드시 필요한 최소한의 개인정보이므로</p>
-          <p>동의를 하셔야 서비스 이용이 가능합니다.</p>
+          <p>{discretion[2]}</p>
+          <p>{discretion[3]}</p>
           <br />
-          <p>이 외 서비스 이용과정에서 별도 동의를 통해</p>
-          <p>추가정보 수집이 있을 수 있습니다.</p>
+          <p>{discretion[4]}</p>
+          <p>{discretion[5]}</p>
         </div>
 
         <div css={checkboxWrapper}>
