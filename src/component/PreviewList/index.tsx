@@ -1,76 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
 import { css } from "@emotion/react";
+import Router from "next/router";
 import { useRef } from "react";
 import { vote } from "../../../public/images";
+import { testCase } from "./testCase";
 
-interface ListProps {
+interface PreviewListProps {
   type: string;
 }
 
-interface testCaseType {
-  key: number;
-  title: string;
-  date: string;
-  status: number;
-  creator: string;
-  image: string;
-}
-
-const List = ({ type }: ListProps) => {
+const PreviewList = ({ type }: PreviewListProps) => {
   const popularityVoteWrapper = useRef<HTMLDivElement>(null);
   const recentVoteWrapper = useRef<HTMLDivElement>(null);
 
-  const testCase: testCaseType[] = [
-    {
-      key: 1,
-      title: "대충 멋진 투표 이름",
-      date: "2022-06-17",
-      status: 24,
-      creator: "username",
-      image: "https://wallpaperaccess.com/full/210538.jpg",
-    },
-    {
-      key: 2,
-      title: "대충 너무 길어서 어떻게 해야 될지도 모르겠는 투표 이름",
-      date: "2022-06-17",
-      status: 37,
-      creator: "longusername123456789",
-      image:
-        "https://img.freepik.com/free-vector/galactic-astral-background_125540-407.jpg",
-    },
-    {
-      key: 3,
-      title: "대충 멋진 투표 이름",
-      date: "2022-06-17",
-      status: 15,
-      creator: "username",
-      image:
-        "https://img3.goodfon.com/wallpaper/nbig/c/8e/space-universe-stars-1933.jpg",
-    },
-    {
-      key: 4,
-      title: "대충 멋진 투표 이름",
-      date: "2022-06-17",
-      status: 6,
-      creator: "username",
-      image: "https://wallpaperaccess.com/full/6084248.jpg",
-    },
-    {
-      key: 5,
-      title: "대충 멋진 투표 이름",
-      date: "2022-06-17",
-      status: 4,
-      creator: "username",
-      image:
-        "https://static.wixstatic.com/media/1585d1_04a86d227edb4c0f96816ea1f60b0d4a~mv2.gif",
-    },
-  ];
-
   const scrollNext = (refObj: React.MutableRefObject<HTMLDivElement>) => {
-    if (
-      Math.ceil(refObj.current.scrollLeft) ===
-      refObj.current.scrollWidth - refObj.current.clientWidth
-    )
+    const sum: number =
+      refObj.current.scrollLeft -
+      (refObj.current.scrollWidth - refObj.current.clientWidth);
+    if (sum < 2 && sum > -2)
       refObj.current.scrollTo({
         top: 0,
         left: 0,
@@ -128,7 +75,9 @@ const List = ({ type }: ListProps) => {
       return (
         <div css={backgroundStyle}>
           <div css={titleStyle}>
-            <h4>인기 급상승 투표 →</h4>
+            <h4 onClick={() => Router.push("/popularity")}>
+              인기 급상승 투표 →
+            </h4>
           </div>
           <div css={contentsWrapper} ref={popularityVoteWrapper}>
             {testCase.map((v) => {
@@ -168,7 +117,7 @@ const List = ({ type }: ListProps) => {
       return (
         <div css={backgroundStyle}>
           <div css={titleStyle}>
-            <h4>최근에 생성된 투표 →</h4>
+            <h4 onClick={() => Router.push("/recent")}>최근에 생성된 투표 →</h4>
           </div>
           <div css={contentsWrapper} ref={recentVoteWrapper}>
             {testCase.map((v) => {
@@ -207,7 +156,7 @@ const List = ({ type }: ListProps) => {
   }
 };
 
-export default List;
+export default PreviewList;
 
 const backgroundStyle = css`
   background-color: #f6f6f6;
@@ -247,8 +196,9 @@ const contentsWrapper = css`
   margin: 0 auto;
   margin-top: 0.5rem;
 
-  width: 92%;
+  width: 93%;
 
+  border-radius: 0.5rem;
   overflow: overlay;
   overflow-x: auto;
   white-space: nowrap;
@@ -278,7 +228,6 @@ const contentBackground = css`
   display: inline-block;
 
   transition: filter 0.25s ease;
-  user-select: none;
   cursor: pointer;
 
   :hover {
@@ -343,13 +292,11 @@ const statusIcon = css`
 `;
 
 const scrollWrapper = css`
-  position: absolute;
-
   transform: translateY(-13.5rem);
 
   margin-top: 0.5rem;
 
-  width: 98%;
+  width: 100%;
 
   display: flex;
   justify-content: space-between;
@@ -369,7 +316,6 @@ const scrollStyle = css`
 
   border-radius: 0.5rem;
   transition: filter 0.25s ease;
-  user-select: none;
   cursor: pointer;
 
   :hover {
