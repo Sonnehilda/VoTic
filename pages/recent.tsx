@@ -7,14 +7,13 @@ import { useState } from "react";
 import PolicyModal from "../src/component/PolicyModal";
 import RegisterModal from "../src/component/RegisterModal";
 import FullViewList from "../src/component/FullViewList";
-import Banner from "../src/component/Banner";
 
 const wrapper = css`
   height: auto;
   min-height: calc(100vh - 6rem);
 `;
 
-export default function Home() {
+export default function Recent() {
   const [modalState, setModalState] = useState<string>("");
 
   return (
@@ -29,11 +28,7 @@ export default function Home() {
         )}
 
         <Header setModalState={setModalState} />
-        <Banner />
-
-        <PreviewList type={"popularity"} />
-        <PreviewList type={"recent"} />
-        <FullViewList />
+        <FullViewList type="recent" />
       </div>
       <Footer />
     </>
