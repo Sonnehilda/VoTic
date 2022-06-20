@@ -4,6 +4,8 @@ const Footer = () => {
   return <footer css={backgroundStyle}></footer>;
 };
 
+export default Footer;
+
 const backgroundStyle = css`
   background-color: #f1f1f1;
 
@@ -16,5 +18,3 @@ const backgroundStyle = css`
   justify-content: center;
   align-items: center;
 `;
-
-export default Footer;

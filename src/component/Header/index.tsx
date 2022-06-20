@@ -24,6 +24,8 @@ const Header = ({ setModalState }: HeaderProps) => {
   );
 };
 
+export default Header;
+
 const backgroundStyle = css`
   background-color: #00ffab;
 
@@ -177,5 +179,3 @@ const userIcon = css`
   cursor: pointer;
   filter: invert(100%);
 `;
-
-export default Header;

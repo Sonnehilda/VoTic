@@ -207,6 +207,8 @@ const List = ({ type }: ListProps) => {
   }
 };
 
+export default List;
+
 const backgroundStyle = css`
   background-color: #f6f6f6;
 
@@ -374,5 +376,3 @@ const scrollStyle = css`
     filter: brightness(95%);
   }
 `;
-
-export default List;

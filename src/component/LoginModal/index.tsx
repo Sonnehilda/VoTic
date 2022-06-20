@@ -27,7 +27,10 @@ const LoginModal = ({ setModalState }: LoginModalProps) => {
             <input id="id" type="id" autoComplete="off" />
           </div>
           <div css={inputStyle}>
-            <label htmlFor="pw">비밀번호</label>
+            <label htmlFor="pw">
+              비밀번호
+              <span>대 · 소문자 & 특수문자 조합</span>
+            </label>
             <input id="pw" type="password" />
           </div>
           <button css={buttonStyle}>로그인</button>
@@ -35,21 +38,24 @@ const LoginModal = ({ setModalState }: LoginModalProps) => {
         <div css={checkboxWrapper}>
           <input id="checkbox" type="checkbox" />
           <label css={labelStyle} htmlFor="checkbox">
-            아이디 기억
+            아이디 저장
           </label>
         </div>
         <div css={linkWrapper}>
           <span>아이디 찾기</span>
+          <strong>|</strong>
           <span>비밀번호 찾기</span>
         </div>
         <div css={linkWrapper}>
           <strong>회원이 아니신가요?</strong>
-          <span>회원가입</span>
+          <span onClick={() => setModalState("policy")}>회원가입</span>
         </div>
       </div>
     </div>
   );
 };
+
+export default LoginModal;
 
 const darkFilter = css`
   background-color: rgba(0, 0, 0, 0.1);
@@ -86,7 +92,7 @@ const titleStyle = css`
   span {
     position: absolute;
 
-    transform: translateX(8.95rem) translateY(-1.75rem);
+    transform: translateX(-8.95rem) translateY(-1.75rem);
 
     user-select: none;
     cursor: pointer;
@@ -108,6 +114,12 @@ const inputStyle = css`
     font-size: 0.25rem;
 
     user-select: none;
+
+    span {
+      margin-left: 0.25rem;
+
+      color: #a1a1a1;
+    }
   }
 
   input {
@@ -169,6 +181,7 @@ const checkboxWrapper = css`
 `;
 
 const labelStyle = css`
+  margin-bottom: 0.1rem;
   font-size: 0.25rem;
 
   user-select: none;
@@ -196,9 +209,8 @@ const linkWrapper = css`
     margin: 0.25rem;
 
     color: blue;
+    text-decoration: underline;
 
     cursor: pointer;
   }
 `;
-
-export default LoginModal;
