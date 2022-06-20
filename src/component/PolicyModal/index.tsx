@@ -2,11 +2,11 @@ import { css } from "@emotion/react";
 import { useRef, useState } from "react";
 import { discretion, purpose } from "./constant";
 
-interface LoginModalProps {
+interface PolicyModalProps {
   setModalState: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const PolicyModal = ({ setModalState }: LoginModalProps) => {
+const PolicyModal = ({ setModalState }: PolicyModalProps) => {
   const filterRef = useRef<HTMLDivElement>(null);
 
   const [advised, setAdvised] = useState<boolean>(false);
@@ -72,7 +72,11 @@ const PolicyModal = ({ setModalState }: LoginModalProps) => {
             위 개인정보 수집 및 이용에 동의합니다.
           </label>
         </div>
-        <button css={buttonStyle} disabled={!advised}>
+        <button
+          css={buttonStyle}
+          disabled={!advised}
+          onClick={() => setModalState("register")}
+        >
           다음
         </button>
       </div>
