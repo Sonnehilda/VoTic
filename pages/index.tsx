@@ -5,6 +5,7 @@ import List from "../src/component/PreviewList";
 import LoginModal from "../src/component/LoginModal";
 import { useState } from "react";
 import PolicyModal from "../src/component/PolicyModal";
+import RegisterModal from "../src/component/RegisterModal";
 
 const wrapper = css`
   height: auto;
@@ -20,6 +21,9 @@ export default function Home() {
         {modalState === "login" && <LoginModal setModalState={setModalState} />}
         {modalState === "policy" && (
           <PolicyModal setModalState={setModalState} />
+        )}
+        {modalState === "register" && (
+          <RegisterModal setModalState={setModalState} />
         )}
 
         <Header setModalState={setModalState} />
