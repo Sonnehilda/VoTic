@@ -4,6 +4,7 @@ import { css } from "@emotion/react";
 import List from "../src/component/PreviewList";
 import LoginModal from "../src/component/LoginModal";
 import { useState } from "react";
+import PolicyModal from "../src/component/PolicyModal";
 
 const wrapper = css`
   height: auto;
@@ -17,6 +18,9 @@ export default function Home() {
     <>
       <div css={wrapper}>
         {modalState === "login" && <LoginModal setModalState={setModalState} />}
+        {modalState === "policy" && (
+          <PolicyModal setModalState={setModalState} />
+        )}
 
         <Header setModalState={setModalState} />
         <List type={"popularity"} />
