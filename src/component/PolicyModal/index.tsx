@@ -123,7 +123,6 @@ const titleStyle = css`
 
     transform: translateX(-8.95rem) translateY(-1.75rem);
 
-    user-select: none;
     cursor: pointer;
   }
 `;
@@ -200,8 +199,6 @@ const checkboxWrapper = css`
 const labelStyle = css`
   margin-bottom: 0.1rem;
   font-size: 0.25rem;
-
-  user-select: none;
 `;
 
 const buttonStyle = css`
@@ -226,7 +223,6 @@ const buttonStyle = css`
 
   transition: background-color 0.25s ease, filter 0.25s ease;
   border-radius: 0.5rem;
-  user-select: none;
 
   :enabled {
     cursor: pointer;

@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { css } from "@emotion/react";
+import Router from "next/router";
 import { search, user } from "../../../public/images";
 
 interface HeaderProps {
@@ -9,7 +10,7 @@ interface HeaderProps {
 const Header = ({ setModalState }: HeaderProps) => {
   return (
     <nav css={backgroundStyle}>
-      <div css={linkStyle}>
+      <div css={linkStyle} onClick={() => Router.push("/")}>
         <span>V</span>o<span>T</span>ic
       </div>
       <form>
@@ -38,8 +39,6 @@ const backgroundStyle = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  user-select: none;
 
   div {
     display: flex;

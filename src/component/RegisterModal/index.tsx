@@ -46,24 +46,14 @@ const RegisterModal = ({ setModalState }: RegisterModalProps) => {
           </div>
           <div css={inputStyle}>
             <label htmlFor="email">이메일</label>
-            <input
-              id="email"
-              type="email"
-              autoComplete="off"
-              disabled={false}
-            />
+            <input id="email" type="email" autoComplete="off" />
           </div>
           <div css={inputStyle}>
             <label htmlFor="verify">
               이메일 인증 코드
-              {false && <span>인증이 완료되었습니다.</span>}
+              {false && <strong>코드가 올바르지 않습니다.</strong>}
             </label>
-            <input
-              id="verify"
-              type="verify"
-              autoComplete="off"
-              disabled={false}
-            />
+            <input id="verify" type="verify" autoComplete="off" />
           </div>
           <button css={buttonStyle}>회원가입</button>
         </form>
@@ -111,7 +101,6 @@ const titleStyle = css`
 
     transform: translateX(-8.95rem) translateY(-1.75rem);
 
-    user-select: none;
     cursor: pointer;
   }
 `;
@@ -129,8 +118,6 @@ const inputStyle = css`
     margin-bottom: 0.25rem;
 
     font-size: 0.25rem;
-
-    user-select: none;
 
     span {
       margin-left: 0.25rem;

@@ -94,7 +94,6 @@ const titleStyle = css`
 
     transform: translateX(-8.95rem) translateY(-1.75rem);
 
-    user-select: none;
     cursor: pointer;
   }
 `;
@@ -112,8 +111,6 @@ const inputStyle = css`
     margin-bottom: 0.25rem;
 
     font-size: 0.25rem;
-
-    user-select: none;
 
     span {
       margin-left: 0.25rem;
@@ -183,8 +180,6 @@ const checkboxWrapper = css`
 const labelStyle = css`
   margin-bottom: 0.1rem;
   font-size: 0.25rem;
-
-  user-select: none;
 `;
 
 const linkWrapper = css`
@@ -194,8 +189,6 @@ const linkWrapper = css`
   justify-content: center;
 
   font-size: 0.25rem;
-
-  user-select: none;
 
   strong {
     all: unset;

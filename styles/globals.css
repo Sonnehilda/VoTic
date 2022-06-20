@@ -12,6 +12,7 @@ body {
 
   overflow: overlay;
   overflow-x: hidden;
+  user-select: none;
 }
 
 #__next {
