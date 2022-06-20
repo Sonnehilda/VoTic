@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { css } from "@emotion/react";
+import Router from "next/router";
 import { useRef } from "react";
 import { vote } from "../../../public/images";
 import { testCaseType } from "../PreviewList/testCase";
@@ -24,7 +25,11 @@ const FullViewList = ({ type }: FullListProps) => {
           <div css={contentsWrapper} ref={defaultVoteWrapper}>
             {testCase.map((v: testCaseType) => {
               return (
-                <div css={contentBackground} key={v.key}>
+                <div
+                  css={contentBackground}
+                  key={v.key}
+                  onClick={() => Router.push(`/vote/${v.key}`)}
+                >
                   <img css={contentImage} src={v.image} alt="image" />
                   <div css={contentInfo}>
                     <span>{v.title}</span>
@@ -51,7 +56,11 @@ const FullViewList = ({ type }: FullListProps) => {
           <div css={contentsWrapper} ref={defaultVoteWrapper}>
             {testCase.map((v: testCaseType) => {
               return (
-                <div css={contentBackground} key={v.key}>
+                <div
+                  css={contentBackground}
+                  key={v.key}
+                  onClick={() => Router.push(`/vote/${v.key}`)}
+                >
                   <img css={contentImage} src={v.image} alt="image" />
                   <div css={contentInfo}>
                     <span>{v.title}</span>
@@ -78,7 +87,11 @@ const FullViewList = ({ type }: FullListProps) => {
           <div css={contentsWrapper} ref={defaultVoteWrapper}>
             {testCase.map((v: testCaseType) => {
               return (
-                <div css={contentBackground} key={v.key}>
+                <div
+                  css={contentBackground}
+                  key={v.key}
+                  onClick={() => Router.push(`/vote/${v.key}`)}
+                >
                   <img css={contentImage} src={v.image} alt="image" />
                   <div css={contentInfo}>
                     <span>{v.title}</span>
@@ -128,13 +141,12 @@ const titleStyle = css`
 const contentsWrapper = css`
   position: relative;
 
-  margin: 0 auto;
+  margin-left: 0.5%;
 
-  width: 96%;
+  width: 100%;
 
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
 
   ::-webkit-scrollbar {
     height: 0.5rem;
@@ -152,10 +164,10 @@ const contentBackground = css`
   background-color: #efefef;
 
   margin-top: 0.5rem;
-  margin-right: 1rem;
+  margin-right: 1%;
 
-  width: 20rem;
-  height: 12.5rem;
+  width: 19%;
+  height: 10rem;
   border-radius: 0.5rem;
 
   display: inline-block;
@@ -235,7 +247,7 @@ const buttonStyle = css`
   margin-bottom: 0.25rem;
 
   width: 16.5rem;
-  height: 1.5rem;
+  height: 2rem;
 
   display: flex;
   justify-content: center;

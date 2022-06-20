@@ -82,7 +82,11 @@ const PreviewList = ({ type }: PreviewListProps) => {
           <div css={contentsWrapper} ref={popularityVoteWrapper}>
             {testCase.map((v) => {
               return (
-                <div css={contentBackground} key={v.key}>
+                <div
+                  css={contentBackground}
+                  key={v.key}
+                  onClick={() => Router.push(`/vote/${v.key}`)}
+                >
                   <img css={contentImage} src={v.image} alt="image" />
                   <div css={contentInfo}>
                     <span>{v.title}</span>
@@ -122,7 +126,11 @@ const PreviewList = ({ type }: PreviewListProps) => {
           <div css={contentsWrapper} ref={recentVoteWrapper}>
             {testCase.map((v) => {
               return (
-                <div css={contentBackground} key={v.key}>
+                <div
+                  css={contentBackground}
+                  key={v.key}
+                  onClick={() => Router.push(`/vote/${v.key}`)}
+                >
                   <img css={contentImage} src={v.image} alt="image" />
                   <div css={contentInfo}>
                     <span>{v.title}</span>
