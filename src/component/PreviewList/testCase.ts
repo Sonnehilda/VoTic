@@ -10,7 +10,7 @@ export interface testCaseType {
 export const testCase: testCaseType[] = [
   {
     key: 1,
-    title: "대충 멋진 투표 이름",
+    title: "1 대충 멋진 투표 이름",
     date: "2022-06-17",
     status: 24,
     creator: "username",
@@ -18,7 +18,7 @@ export const testCase: testCaseType[] = [
   },
   {
     key: 2,
-    title: "대충 너무 길어서 어떻게 해야 될지도 모르겠는 투표 이름",
+    title: "2 대충 너무 길어서 어떻게 해야 될지도 모르겠는 투표 이름",
     date: "2022-06-17",
     status: 37,
     creator: "longusername123456789",
@@ -27,7 +27,7 @@ export const testCase: testCaseType[] = [
   },
   {
     key: 3,
-    title: "대충 멋진 투표 이름",
+    title: "3 대충 멋진 투표 이름",
     date: "2022-06-17",
     status: 15,
     creator: "username",
@@ -36,7 +36,7 @@ export const testCase: testCaseType[] = [
   },
   {
     key: 4,
-    title: "대충 멋진 투표 이름",
+    title: "4 대충 멋진 투표 이름",
     date: "2022-06-17",
     status: 6,
     creator: "username",
@@ -44,7 +44,7 @@ export const testCase: testCaseType[] = [
   },
   {
     key: 5,
-    title: "대충 멋진 투표 이름",
+    title: "5 대충 멋진 투표 이름",
     date: "2022-06-17",
     status: 4,
     creator: "username",
@@ -53,7 +53,7 @@ export const testCase: testCaseType[] = [
   },
   {
     key: 6,
-    title: "대충 멋진 투표 이름",
+    title: "6 대충 멋진 투표 이름",
     date: "2022-06-17",
     status: 24,
     creator: "username",
@@ -61,7 +61,7 @@ export const testCase: testCaseType[] = [
   },
   {
     key: 7,
-    title: "대충 너무 길어서 어떻게 해야 될지도 모르겠는 투표 이름",
+    title: "7 대충 너무 길어서 어떻게 해야 될지도 모르겠는 투표 이름",
     date: "2022-06-17",
     status: 37,
     creator: "longusername123456789",
@@ -70,7 +70,7 @@ export const testCase: testCaseType[] = [
   },
   {
     key: 8,
-    title: "대충 멋진 투표 이름",
+    title: "8 대충 멋진 투표 이름",
     date: "2022-06-17",
     status: 15,
     creator: "username",
@@ -79,7 +79,7 @@ export const testCase: testCaseType[] = [
   },
   {
     key: 9,
-    title: "대충 멋진 투표 이름",
+    title: "9 대충 멋진 투표 이름",
     date: "2022-06-17",
     status: 6,
     creator: "username",
@@ -87,7 +87,7 @@ export const testCase: testCaseType[] = [
   },
   {
     key: 10,
-    title: "대충 멋진 투표 이름",
+    title: "10 대충 멋진 투표 이름",
     date: "2022-06-17",
     status: 4,
     creator: "username",

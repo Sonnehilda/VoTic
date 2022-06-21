@@ -29,7 +29,7 @@ export default function Home() {
         )}
 
         <Header setModalState={setModalState} />
-        <Banner />
+        <Banner setModalState={setModalState} />
 
         <PreviewList type={"popularity"} />
         <PreviewList type={"recent"} />

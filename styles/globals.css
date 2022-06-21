@@ -23,6 +23,10 @@ body {
   box-sizing: border-box;
 }
 
+img {
+  pointer-events: none;
+}
+
 ::-webkit-scrollbar {
   width: 0.5rem;
 }
