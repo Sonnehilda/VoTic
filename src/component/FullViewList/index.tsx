@@ -124,6 +124,10 @@ const backgroundStyle = css`
   margin-bottom: 1.5rem;
 
   width: 100%;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #1a1a1a;
+  }
 `;
 
 const titleStyle = css`
@@ -132,7 +136,6 @@ const titleStyle = css`
   display: flex;
   align-items: center;
 
-  color: #000;
   font-weight: 100;
 
   border-bottom: 0.1px solid #aaa;
@@ -181,6 +184,10 @@ const contentBackground = css`
 
   :last-of-type {
     margin-right: 0;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #333;
   }
 `;
 
@@ -262,5 +269,9 @@ const buttonStyle = css`
 
   :hover {
     filter: brightness(95%);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #333;
   }
 `;

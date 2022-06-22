@@ -176,6 +176,10 @@ const backgroundStyle = css`
 
   width: 100%;
   height: 16rem;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #1a1a1a;
+  }
 `;
 
 const titleStyle = css`
@@ -184,7 +188,6 @@ const titleStyle = css`
   display: flex;
   align-items: center;
 
-  color: #000;
   font-weight: 100;
 
   border-bottom: 0.1px solid #aaa;
@@ -222,6 +225,12 @@ const contentsWrapper = css`
     border-radius: 1.5rem;
     box-shadow: inset 0 0 6rem #00ffab;
   }
+
+  @media (prefers-color-scheme: dark) {
+    ::-webkit-scrollbar-thumb {
+      box-shadow: inset 0 0 6rem #000;
+    }
+  }
 `;
 
 const contentBackground = css`
@@ -244,6 +253,10 @@ const contentBackground = css`
 
   :last-of-type {
     margin-right: 0;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #333;
   }
 `;
 
@@ -328,5 +341,9 @@ const scrollStyle = css`
 
   :hover {
     filter: brightness(95%);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #333;
   }
 `;

@@ -29,7 +29,9 @@ export default function Home() {
         )}
 
         <Header setModalState={setModalState} />
-        <Banner setModalState={setModalState} />
+        {
+          //<Banner setModalState={setModalState} />
+        }
 
         <PreviewList type={"popularity"} />
         <PreviewList type={"recent"} />

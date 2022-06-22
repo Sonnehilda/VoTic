@@ -12,10 +12,9 @@ const Vote = () => {
   const testCase2: TestCaseProps[] = [
     { key: 0, title: "백색시유", status: 1368710 },
     { key: 1, title: "바나나 우유", status: 216866 },
-    { key: 2, title: "딸기 우유", status: 223932 },
-    { key: 3, title: "초코 우유", status: 121736 },
-    { key: 3, title: "커피 우유", status: 86771 },
-    { key: 3, title: "딸기 우유", status: 69853 },
+    { key: 3, title: "초코 우유", status: 223932 },
+    { key: 3, title: "커피 우유", status: 121736 },
+    { key: 3, title: "딸기 우유", status: 86771 },
   ];
   const [totalStatus, setTotalStatus] = useState<number>(0);
 
@@ -41,7 +40,7 @@ const Vote = () => {
           >
             <span>
               {v.title} ({((100 / totalStatus) * v.status).toFixed(1)}%)
-              <span css={detailStyle}>({v.status}표)</span>
+              <span css={detailStyle}>({v.status.toLocaleString()}표)</span>
             </span>
             <strong />
           </button>
@@ -63,6 +62,10 @@ const backgroundStyle = css`
   margin-bottom: 1.5rem;
 
   width: 100%;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #1a1a1a;
+  }
 `;
 
 const titleStyle = css`
@@ -71,18 +74,9 @@ const titleStyle = css`
   display: flex;
   align-items: center;
 
-  color: #000;
   font-weight: 100;
 
   border-bottom: 0.1px solid #aaa;
-
-  h4 {
-    cursor: pointer;
-
-    :hover {
-      filter: opacity(50%);
-    }
-  }
 `;
 
 const optionStyle = (gauge: number) => css`
@@ -131,6 +125,16 @@ const optionStyle = (gauge: number) => css`
 
     border-radius: 0.5rem;
     z-index: 0;
+
+    @media (prefers-color-scheme: dark) {
+      background-color: #1a1a1a;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #333;
+
+    border: 0.1px solid #666;
   }
 `;
 

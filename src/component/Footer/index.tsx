@@ -34,4 +34,8 @@ const backgroundStyle = css`
       margin-top: 0.5rem;
     }
   }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #1a1a1a;
+  }
 `;

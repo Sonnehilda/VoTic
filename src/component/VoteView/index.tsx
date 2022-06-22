@@ -41,6 +41,10 @@ const backgroundStyle = css`
   margin-bottom: 1.5rem;
 
   width: 100%;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #1a1a1a;
+  }
 `;
 
 const leaveStyle = css`
@@ -66,6 +70,16 @@ const contentInfo = css`
   justify-content: space-between;
   align-items: center;
 
+  :first-of-type {
+    margin-top: 0.5rem;
+  }
+
+  :last-of-type {
+    padding-bottom: 0.5rem;
+
+    height: max-content;
+  }
+
   h2 {
     margin: 0;
   }
@@ -85,15 +99,5 @@ const contentInfo = css`
     max-height: 15rem;
 
     object-fit: cover;
-  }
-
-  :first-of-type {
-    margin-top: 0.5rem;
-  }
-
-  :last-of-type {
-    padding-bottom: 0.5rem;
-
-    height: max-content;
   }
 `;

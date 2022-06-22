@@ -9,7 +9,7 @@ interface HeaderProps {
 
 const Header = ({ setModalState }: HeaderProps) => {
   return (
-    <nav css={backgroundStyle}>
+    <header css={backgroundStyle}>
       <div css={linkStyle} onClick={() => Router.push("/")}>
         <span>V</span>o<span>T</span>ic
       </div>
@@ -21,7 +21,7 @@ const Header = ({ setModalState }: HeaderProps) => {
         <span>로그인</span>
         <img css={userIcon} src={`${user.src}`} alt="user" />
       </div>
-    </nav>
+    </header>
   );
 };
 
@@ -29,7 +29,6 @@ export default Header;
 
 const backgroundStyle = css`
   background-color: #00ffab;
-
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-bottom: 0.15rem;
@@ -44,11 +43,9 @@ const backgroundStyle = css`
     display: flex;
 
     :first-of-type {
-      width: 25%;
       justify-content: left;
     }
     :last-of-type {
-      width: 25%;
       justify-content: right;
     }
   }
@@ -59,6 +56,7 @@ const backgroundStyle = css`
     border-bottom: 0.1px solid #fff;
 
     display: flex;
+    justify-content: center;
     align-items: center;
   }
 `;
@@ -85,7 +83,6 @@ const linkStyle = css`
   }
 
   span {
-    color: #e3fcbf;
     font-size: 1.5rem;
     font-weight: 600;
   }
@@ -94,12 +91,12 @@ const linkStyle = css`
 const inputIcon = css`
   position: absolute;
 
-  margin-left: 10.25rem;
+  transform: translateX(-8.5rem);
 
   width: 0.75rem;
   height: 0.75rem;
 
-  transition: margin-left 0.25s, opacity 0.25s ease-out;
+  transition: opacity 0.25s ease-out;
   cursor: pointer;
   filter: invert(100%);
   opacity: 0;
@@ -129,8 +126,6 @@ const inputStyle = css`
   }
 
   :focus ~ img {
-    margin-left: 0.25rem;
-
     opacity: 1;
   }
 `;
