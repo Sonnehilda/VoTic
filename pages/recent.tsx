@@ -1,7 +1,6 @@
 import Footer from "../src/component/Footer";
 import Header from "../src/component/Header";
 import { css } from "@emotion/react";
-import PreviewList from "../src/component/PreviewList";
 import LoginModal from "../src/component/LoginModal";
 import { useState } from "react";
 import PolicyModal from "../src/component/PolicyModal";
@@ -28,7 +27,7 @@ export default function Recent() {
         )}
 
         <Header setModalState={setModalState} />
-        <FullViewList type="recent" />
+        <FullViewList title="최근에 생성된 투표" type="recent" />
       </div>
       <Footer />
     </>
