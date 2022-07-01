@@ -7,7 +7,6 @@ import { useState } from "react";
 import PolicyModal from "../src/component/PolicyModal";
 import RegisterModal from "../src/component/RegisterModal";
 import FullViewList from "../src/component/FullViewList";
-import Banner from "../src/component/Banner";
 
 const wrapper = css`
   height: auto;
@@ -29,12 +28,9 @@ export default function Home() {
         )}
 
         <Header setModalState={setModalState} />
-        {
-          //<Banner setModalState={setModalState} />
-        }
 
-        <PreviewList type={"popularity"} />
-        <PreviewList type={"recent"} />
+        <PreviewList title={"인기 급상승 투표"} type={"popularity"} />
+        <PreviewList title={"최근에 생성된 투표"} type={"recent"} />
         <FullViewList />
       </div>
       <Footer />
