@@ -56,7 +56,7 @@ const backgroundStyle = css`
     border-bottom: 0.1px solid #fff;
 
     display: flex;
-    justify-content: center;
+    flex-direction: row-reverse;
     align-items: center;
   }
 `;
@@ -89,10 +89,7 @@ const linkStyle = css`
 `;
 
 const inputIcon = css`
-  position: absolute;
-
-  transform: translateX(-8.5rem);
-
+  margin-left: 0.25rem;
   width: 0.75rem;
   height: 0.75rem;
 
@@ -105,7 +102,7 @@ const inputIcon = css`
 const inputStyle = css`
   all: unset;
 
-  padding-left: 1.25rem;
+  padding-left: 0.25rem;
   padding-right: 1.25rem;
 
   width: 100%;
