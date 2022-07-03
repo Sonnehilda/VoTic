@@ -1,15 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import { css } from "@emotion/react";
 import { useEffect, useState } from "react";
-
-interface TestCaseProps {
-  key: number;
-  title: string;
-  status: number;
-}
+import { testCaseType } from "../PreviewList/testCase";
 
 const Vote = () => {
-  const testCase2: TestCaseProps[] = [
+  const data: testCaseType[] = [
     { key: 0, title: "백색시유", status: 1368710 },
     { key: 1, title: "바나나 우유", status: 216866 },
     { key: 3, title: "초코 우유", status: 223932 },
@@ -20,7 +15,7 @@ const Vote = () => {
 
   useEffect(() => {
     let temp = 0;
-    testCase2.forEach((v) => {
+    data.forEach((v) => {
       temp += v.status;
     });
     setTotalStatus(temp);
@@ -32,7 +27,7 @@ const Vote = () => {
       <div css={titleStyle}>
         <h4>투표 현황</h4>
       </div>
-      {testCase2.map((v) => {
+      {data.map((v) => {
         return (
           <button
             key={v.title}

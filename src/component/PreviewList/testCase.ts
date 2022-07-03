@@ -1,10 +1,10 @@
 export interface testCaseType {
   key: number;
   title: string;
-  date: string;
+  date?: string;
   status: number;
-  creator: string;
-  image: string;
+  creator?: string;
+  image?: string;
 }
 
 export const testCase: testCaseType[] = [
