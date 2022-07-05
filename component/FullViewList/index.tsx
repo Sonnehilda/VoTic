@@ -1,20 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
-import { css } from "@emotion/react";
 import { useRef } from "react";
-import { testCase as data } from "../PreviewList/testCase";
+import { css } from "@emotion/react";
+import theme, { ThemeProps } from "../../styles/theme";
 import VoteCard from "../VoteCard";
+import { testCase as data } from "../PreviewList/testCase";
 
 interface FullListProps {
   title?: string;
   type?: string;
 }
 
-const FullViewList = ({ title, type }: FullListProps) => {
+const FullViewList = ({ title, type, themeId }: FullListProps & ThemeProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div css={backgroundStyle}>
-      <div css={titleStyle}>
+    <div css={() => backgroundStyle(themeId)}>
+      <div css={() => titleStyle(themeId)}>
         <h4>{title ? title : "모든 투표"}</h4>
       </div>
       <div css={contentsWrapper} ref={wrapperRef}>
@@ -29,19 +30,20 @@ const FullViewList = ({ title, type }: FullListProps) => {
               status={v.status}
               date={v.date}
               size="fixed"
+              themeId={themeId}
             />
           );
         })}
       </div>
-      <button css={buttonStyle}>더 보기</button>
+      <button css={() => buttonStyle(themeId)}>더 보기</button>
     </div>
   );
 };
 
 export default FullViewList;
 
-const backgroundStyle = css`
-  background-color: #f6f6f6;
+const backgroundStyle = (themeId: string) => css`
+  background-color: ${theme[themeId].background};
 
   padding-left: 1%;
   padding-right: 1%;
@@ -51,12 +53,10 @@ const backgroundStyle = css`
 
   width: 100%;
 
-  @media (prefers-color-scheme: dark) {
-    background-color: #1a1a1a;
-  }
+  color: ${theme[themeId].color};
 `;
 
-const titleStyle = css`
+const titleStyle = (themeId: string) => css`
   height: 2rem;
 
   display: flex;
@@ -64,7 +64,7 @@ const titleStyle = css`
 
   font-weight: 100;
 
-  border-bottom: 0.1px solid #aaa;
+  border-bottom: 0.1px solid ${theme[themeId.replace("0", "4")].background};
 `;
 
 const contentsWrapper = css`
@@ -89,10 +89,10 @@ const contentsWrapper = css`
   }
 `;
 
-const buttonStyle = css`
+const buttonStyle = (themeId: string) => css`
   all: unset;
 
-  background-color: #efefef;
+  background-color: ${theme[themeId.replace("0", "1")].background};
 
   padding: 0.25rem;
   margin: 0 auto;
@@ -109,15 +109,11 @@ const buttonStyle = css`
   font-size: 0.75rem;
   text-align: center;
 
-  transition: filter 0.25s ease;
+  transition: background-color 0.25s ease;
   border-radius: 0.5rem;
   cursor: pointer;
 
   :hover {
-    filter: brightness(95%);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    background-color: #333;
+    background-color: ${theme[themeId.replace("0", "1")].hoverBackground};
   }
 `;
