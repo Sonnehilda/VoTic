@@ -1,3 +1,5 @@
-export { default as user } from "./user-solid.png";
-export { default as search } from "./magnifying-glass-solid.png";
+export { default as user } from "./user.png";
+export { default as search } from "./search.png";
 export { default as vote } from "./vote.png";
+export { default as sun } from "./sun.png";
+export { default as moon } from "./moon.png";
