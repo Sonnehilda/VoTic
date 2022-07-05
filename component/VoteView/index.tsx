@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { css } from "@emotion/react";
+import theme, { ThemeProps } from "../../styles/theme";
 import Router from "next/router";
 import { testCase } from "../PreviewList/testCase";
 
@@ -7,13 +8,13 @@ interface VoteViewProps {
   voteId: number;
 }
 
-const VoteView = ({ voteId }: VoteViewProps) => {
+const VoteView = ({ voteId, themeId }: VoteViewProps & ThemeProps) => {
   return (
-    <div css={backgroundStyle}>
+    <div css={() => backgroundStyle(themeId)}>
       <span css={leaveStyle} onClick={() => Router.push("/")}>
         ← 홈페이지로 돌아가기
       </span>
-      <div css={infoWrapper}>
+      <div css={() => infoWrapper(themeId)}>
         <div css={contentInfo}>
           <h2>{testCase[voteId].title}</h2>
           <span>{testCase[voteId].date}</span>
@@ -21,9 +22,9 @@ const VoteView = ({ voteId }: VoteViewProps) => {
         <div css={contentInfo}>
           <strong>{testCase[voteId].creator}</strong>
         </div>
-        <div css={contentInfo}>
-          <img src={testCase[voteId].image} alt="img" />
-        </div>
+      </div>
+      <div css={contentInfo}>
+        <img src={testCase[voteId].image} alt="img" />
       </div>
     </div>
   );
@@ -31,20 +32,19 @@ const VoteView = ({ voteId }: VoteViewProps) => {
 
 export default VoteView;
 
-const backgroundStyle = css`
-  background-color: #f6f6f6;
+const backgroundStyle = (themeId: string) => css`
+  background-color: ${theme[themeId].background};
 
   padding-left: 1%;
   padding-right: 1%;
-  padding-bottom: 0.5rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.25rem;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 
   width: 100%;
 
-  @media (prefers-color-scheme: dark) {
-    background-color: #1a1a1a;
-  }
+  color: ${theme[themeId].color};
 `;
 
 const leaveStyle = css`
@@ -59,8 +59,8 @@ const leaveStyle = css`
   }
 `;
 
-const infoWrapper = css`
-  border-bottom: 0.1px solid #aaa;
+const infoWrapper = (themeId: string) => css`
+  border-bottom: 0.1px solid ${theme[themeId.replace("0", "4")].background};
 `;
 
 const contentInfo = css`
@@ -75,7 +75,7 @@ const contentInfo = css`
   }
 
   :last-of-type {
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.25rem;
 
     height: max-content;
   }
@@ -85,16 +85,22 @@ const contentInfo = css`
   }
 
   strong {
-    font-size: 1rem;
-    font-weight: 400;
+    margin-top: 0.1rem;
+
+    color: #a1a1a1;
+    font-size: 0.9rem;
+    font-weight: 300;
   }
 
   span {
-    font-size: 0.75rem;
-    font-weight: 100;
+    color: #a1a1a1;
+    font-size: 0.9rem;
+    font-weight: 300;
   }
 
   img {
+    margin-top: 0.5rem;
+
     width: 100%;
     max-height: 15rem;
 
