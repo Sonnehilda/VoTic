@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import { css } from "@emotion/react";
-import Router from "next/router";
 import { useRef } from "react";
+import { css } from "@emotion/react";
+import theme, { ThemeProps } from "../../styles/theme";
 import VoteCard from "../VoteCard";
+import Router from "next/router";
 import { testCase as data } from "./testCase";
 
 interface PreviewListProps {
@@ -10,7 +11,11 @@ interface PreviewListProps {
   type: string;
 }
 
-const PreviewList = ({ title, type }: PreviewListProps) => {
+const PreviewList = ({
+  title,
+  type,
+  themeId,
+}: PreviewListProps & ThemeProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const scrollNext = (refObj: React.MutableRefObject<HTMLDivElement>) => {
@@ -71,8 +76,8 @@ const PreviewList = ({ title, type }: PreviewListProps) => {
   };
 
   return (
-    <div css={backgroundStyle}>
-      <div css={titleStyle}>
+    <div css={() => backgroundStyle(themeId)}>
+      <div css={() => titleStyle(themeId)}>
         <h4 onClick={() => Router.push(`/${type}`)}>{title} →</h4>
       </div>
       <div css={contentsWrapper} ref={wrapperRef}>
@@ -86,15 +91,22 @@ const PreviewList = ({ title, type }: PreviewListProps) => {
               creator={v.creator}
               status={v.status}
               date={v.date}
+              themeId={themeId}
             />
           );
         })}
       </div>
       <div css={scrollWrapper}>
-        <div css={scrollStyle} onClick={() => scrollPrev(wrapperRef)}>
+        <div
+          css={() => scrollStyle(themeId)}
+          onClick={() => scrollPrev(wrapperRef)}
+        >
           ◀
         </div>
-        <div css={scrollStyle} onClick={() => scrollNext(wrapperRef)}>
+        <div
+          css={() => scrollStyle(themeId)}
+          onClick={() => scrollNext(wrapperRef)}
+        >
           ▶
         </div>
       </div>
@@ -104,8 +116,8 @@ const PreviewList = ({ title, type }: PreviewListProps) => {
 
 export default PreviewList;
 
-const backgroundStyle = css`
-  background-color: #f6f6f6;
+const backgroundStyle = (themeId: string) => css`
+  background-color: ${theme[themeId].background};
 
   margin: 0 auto;
   margin-top: 1.5rem;
@@ -115,12 +127,10 @@ const backgroundStyle = css`
   width: 100%;
   height: 16rem;
 
-  @media (prefers-color-scheme: dark) {
-    background-color: #1a1a1a;
-  }
+  color: ${theme[themeId].color};
 `;
 
-const titleStyle = css`
+const titleStyle = (themeId: string) => css`
   height: 2rem;
 
   display: flex;
@@ -128,7 +138,7 @@ const titleStyle = css`
 
   font-weight: 100;
 
-  border-bottom: 0.1px solid #aaa;
+  border-bottom: 0.1px solid ${theme[themeId.replace("0", "4")].background};
 
   h4 {
     cursor: pointer;
@@ -163,12 +173,6 @@ const contentsWrapper = css`
     border-radius: 1.5rem;
     box-shadow: inset 0 0 6rem #00ffab;
   }
-
-  @media (prefers-color-scheme: dark) {
-    ::-webkit-scrollbar-thumb {
-      box-shadow: inset 0 0 6rem #000;
-    }
-  }
 `;
 
 const scrollWrapper = css`
@@ -184,8 +188,8 @@ const scrollWrapper = css`
   z-index: 0;
 `;
 
-const scrollStyle = css`
-  background-color: #efefef;
+const scrollStyle = (themeId: string) => css`
+  background-color: ${theme[themeId.replace("0", "1")].background};
 
   width: 3%;
   height: 13rem;
@@ -200,9 +204,5 @@ const scrollStyle = css`
 
   :hover {
     filter: brightness(95%);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    background-color: #333;
   }
 `;
