@@ -72,7 +72,7 @@ const theme = {
 };
 
 export interface ThemeProps {
-  themeId: themeId;
+  themeId: themeId | string;
 }
 
 export default theme;
