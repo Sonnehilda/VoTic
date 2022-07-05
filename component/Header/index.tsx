@@ -1,17 +1,30 @@
 /* eslint-disable @next/next/no-img-element */
 import { css } from "@emotion/react";
+import { search, user, sun, moon } from "../../public/images";
 import Router from "next/router";
-import { search, user } from "../../../public/images";
+import { useContext } from "react";
+import { ThemeColorContext } from "../../context/Theme";
 
 interface HeaderProps {
   setModalState: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const Header = ({ setModalState }: HeaderProps) => {
+  const { themeColor, toggleThemeColor } = useContext(ThemeColorContext);
+
   return (
     <header css={backgroundStyle}>
-      <div css={linkStyle} onClick={() => Router.push("/")}>
-        <span>V</span>o<span>T</span>ic
+      <div>
+        <div css={linkStyle} onClick={() => Router.push("/")}>
+          <span>V</span>o<span>T</span>ic
+        </div>
+        <div css={themeColorIcon} onClick={() => toggleThemeColor()}>
+          <img
+            src={`${themeColor === "light" ? sun.src : moon.src}`}
+            alt="Dark Mode"
+          />
+          <span>{themeColor === "light" ? "라이트 모드" : "다크 모드"}</span>
+        </div>
       </div>
       <form>
         <input css={inputStyle} type="text" placeholder="검색" />
@@ -19,7 +32,7 @@ const Header = ({ setModalState }: HeaderProps) => {
       </form>
       <div css={userStyle} onClick={() => setModalState("login")}>
         <span>로그인</span>
-        <img css={userIcon} src={`${user.src}`} alt="user" />
+        <img css={userIcon} src={`${user.src}`} alt="User Icon" />
       </div>
     </header>
   );
@@ -41,6 +54,7 @@ const backgroundStyle = css`
 
   div {
     display: flex;
+    align-items: center;
 
     :first-of-type {
       justify-content: left;
@@ -51,6 +65,11 @@ const backgroundStyle = css`
   }
 
   form {
+    position: absolute;
+
+    left: 50%;
+    transform: translateX(-50%);
+
     width: 40%;
 
     border-bottom: 0.1px solid #fff;
@@ -62,6 +81,8 @@ const backgroundStyle = css`
 `;
 
 const linkStyle = css`
+  margin-right: 0.25rem;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -95,7 +116,6 @@ const inputIcon = css`
 
   transition: opacity 0.25s ease-out;
   cursor: pointer;
-  filter: invert(100%);
   opacity: 0;
 `;
 
@@ -164,9 +184,42 @@ const userIcon = css`
   width: 1.5rem;
   height: 1.5rem;
 
-  border: 0.1px solid #000;
+  border: 0.1px solid #fff;
   border-radius: 50%;
   transition: filter 0.15s ease;
   cursor: pointer;
-  filter: invert(100%);
+`;
+
+const themeColorIcon = css`
+  cursor: pointer;
+
+  img {
+    margin-top: 0.2rem;
+    margin-left: 0.5rem;
+
+    width: 1.25rem;
+    height: 1.25rem;
+
+    transition: filter 0.15s ease;
+  }
+
+  :hover img,
+  :hover span {
+    filter: brightness(90%) drop-shadow(0 0 0.5rem #aaa);
+  }
+
+  span {
+    margin-top: 0.2rem;
+    margin-left: 0.4rem;
+
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 100;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    overflow: hidden;
+    transition: filter 0.15s ease;
+  }
 `;
