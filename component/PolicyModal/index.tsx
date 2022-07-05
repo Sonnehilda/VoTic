@@ -1,12 +1,16 @@
-import { css } from "@emotion/react";
 import { useRef, useState } from "react";
+import { css } from "@emotion/react";
+import theme, { ThemeProps } from "../../styles/theme";
 import { discretion, purpose } from "./constant";
 
 interface PolicyModalProps {
   setModalState: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const PolicyModal = ({ setModalState }: PolicyModalProps) => {
+const PolicyModal = ({
+  setModalState,
+  themeId,
+}: PolicyModalProps & ThemeProps) => {
   const filterRef = useRef<HTMLDivElement>(null);
 
   const [advised, setAdvised] = useState<boolean>(false);
@@ -19,7 +23,7 @@ const PolicyModal = ({ setModalState }: PolicyModalProps) => {
         if (e.target === filterRef.current) setModalState("");
       }}
     >
-      <div css={backgroundStyle}>
+      <div css={() => backgroundStyle(themeId)}>
         <div css={titleStyle}>
           <h1>회원가입</h1>
           <span onClick={() => setModalState("login")}>←</span>
@@ -36,7 +40,7 @@ const PolicyModal = ({ setModalState }: PolicyModalProps) => {
           <span>수집 목적</span>
           <span>보유 기간</span>
         </div>
-        <div css={contentWrapper}>
+        <div css={() => contentWrapper(themeId)}>
           <div>
             <span>이메일</span>
           </div>
@@ -73,7 +77,7 @@ const PolicyModal = ({ setModalState }: PolicyModalProps) => {
           </label>
         </div>
         <button
-          css={buttonStyle}
+          css={() => buttonStyle(themeId)}
           disabled={!advised}
           onClick={() => setModalState("register")}
         >
@@ -96,8 +100,8 @@ const darkFilter = css`
   z-index: 2;
 `;
 
-const backgroundStyle = css`
-  background-color: #f6f6f6;
+const backgroundStyle = (themeId: string) => css`
+  background-color: ${theme[themeId].background};
 
   position: fixed;
 
@@ -108,6 +112,8 @@ const backgroundStyle = css`
   padding-bottom: 0.5rem;
 
   width: 20rem;
+
+  color: ${theme[themeId].color};
 
   border-radius: 0.5rem;
   z-index: 3;
@@ -146,7 +152,7 @@ const titleWrapper = css`
   }
 `;
 
-const contentWrapper = css`
+const contentWrapper = (themeId: string) => css`
   margin: 0 auto;
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -158,8 +164,14 @@ const contentWrapper = css`
   justify-content: space-between;
   align-items: center;
 
-  border-top: 0.1vh solid #000;
-  border-bottom: 0.1vh solid #000;
+  border-top: 0.1vh solid
+    ${themeId.includes("light")
+      ? theme[themeId.replace("light", "dark")].background
+      : theme[themeId.replace("dark", "light")].background};
+  border-bottom: 0.1vh solid
+    ${themeId.includes("light")
+      ? theme[themeId.replace("light", "dark")].background
+      : theme[themeId.replace("dark", "light")].background};
 
   span {
     width: 6rem;
@@ -201,10 +213,10 @@ const labelStyle = css`
   font-size: 0.25rem;
 `;
 
-const buttonStyle = css`
+const buttonStyle = (themeId: string) => css`
   all: unset;
 
-  background-color: #efefef;
+  background-color: ${theme[themeId.replace("0", "1")].background};
 
   padding: 0.25rem;
   margin: 0 auto;
@@ -221,7 +233,7 @@ const buttonStyle = css`
   font-size: 0.75rem;
   text-align: center;
 
-  transition: background-color 0.25s ease, filter 0.25s ease;
+  transition: background-color 0.25s ease;
   border-radius: 0.5rem;
 
   :enabled {
@@ -229,10 +241,10 @@ const buttonStyle = css`
   }
 
   :hover:enabled {
-    filter: brightness(95%);
+    background-color: ${theme[themeId.replace("0", "1")].hoverBackground};
   }
 
   :disabled {
-    background-color: #e1e1e1;
+    background-color: ${theme[themeId.replace("0", "2")].background};
   }
 `;
