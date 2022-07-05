@@ -1,11 +1,15 @@
-import { css } from "@emotion/react";
 import { useRef } from "react";
+import { css } from "@emotion/react";
+import theme, { ThemeProps } from "../../styles/theme";
 
 interface RegisterModalProps {
   setModalState: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const RegisterModal = ({ setModalState }: RegisterModalProps) => {
+const RegisterModal = ({
+  setModalState,
+  themeId,
+}: RegisterModalProps & ThemeProps) => {
   const filterRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -16,20 +20,20 @@ const RegisterModal = ({ setModalState }: RegisterModalProps) => {
         if (e.target === filterRef.current) setModalState("");
       }}
     >
-      <div css={backgroundStyle}>
+      <div css={() => backgroundStyle(themeId)}>
         <div css={titleStyle}>
           <h1>회원가입</h1>
           <span onClick={() => setModalState("policy")}>←</span>
         </div>
         <form>
-          <div css={inputStyle}>
+          <div css={() => inputStyle(themeId)}>
             <label htmlFor="id">
               아이디
               {false && <strong>사용할 수 없는 아이디입니다.</strong>}
             </label>
             <input id="id" type="id" autoComplete="off" />
           </div>
-          <div css={inputStyle}>
+          <div css={() => inputStyle(themeId)}>
             <label htmlFor="pw">
               비밀번호
               {false ? <strong>8자리 이상</strong> : <span>8자리 이상</span>}
@@ -44,18 +48,18 @@ const RegisterModal = ({ setModalState }: RegisterModalProps) => {
             </label>
             <input id="pw" type="password" />
           </div>
-          <div css={inputStyle}>
+          <div css={() => inputStyle(themeId)}>
             <label htmlFor="email">이메일</label>
             <input id="email" type="email" autoComplete="off" />
           </div>
-          <div css={inputStyle}>
+          <div css={() => inputStyle(themeId)}>
             <label htmlFor="verify">
               이메일 인증 코드
               {false && <strong>코드가 올바르지 않습니다.</strong>}
             </label>
             <input id="verify" type="verify" autoComplete="off" />
           </div>
-          <button css={buttonStyle}>회원가입</button>
+          <button css={() => buttonStyle(themeId)}>회원가입</button>
         </form>
       </div>
     </div>
@@ -74,8 +78,8 @@ const darkFilter = css`
   z-index: 2;
 `;
 
-const backgroundStyle = css`
-  background-color: #f6f6f6;
+const backgroundStyle = (themeId: string) => css`
+  background-color: ${theme[themeId].background};
 
   position: fixed;
 
@@ -86,6 +90,8 @@ const backgroundStyle = css`
   padding-bottom: 0.5rem;
 
   width: 20rem;
+
+  color: ${theme[themeId].color};
 
   border-radius: 0.5rem;
   z-index: 3;
@@ -105,7 +111,7 @@ const titleStyle = css`
   }
 `;
 
-const inputStyle = css`
+const inputStyle = (themeId: string) => css`
   margin: 0 auto;
 
   width: 17rem;
@@ -137,7 +143,7 @@ const inputStyle = css`
   input {
     all: unset;
 
-    background-color: #efefef;
+    background-color: ${theme[themeId.replace("0", "1")].background};
 
     padding: 0.25rem;
     padding-left: 0.5rem;
@@ -153,15 +159,15 @@ const inputStyle = css`
     transition: background-color 0.25s ease;
 
     :disabled {
-      background-color: #e1e1e1;
+      background-color: ${theme[themeId.replace("0", "2")].background};
     }
   }
 `;
 
-const buttonStyle = css`
+const buttonStyle = (themeId: string) => css`
   all: unset;
 
-  background-color: #efefef;
+  background-color: ${theme[themeId.replace("0", "1")].background};
 
   padding: 0.25rem;
   margin: 0 auto;
@@ -178,11 +184,11 @@ const buttonStyle = css`
   font-size: 0.75rem;
   text-align: center;
 
-  transition: filter 0.25s ease;
+  transition: background-color 0.25s ease;
   border-radius: 0.5rem;
   cursor: pointer;
 
   :hover {
-    filter: brightness(95%);
+    background-color: ${theme[themeId.replace("0", "1")].hoverBackground};
   }
 `;
