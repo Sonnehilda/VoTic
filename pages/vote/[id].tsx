@@ -1,14 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
-import Footer from "../../src/component/Footer";
-import Header from "../../src/component/Header";
-import { css } from "@emotion/react";
-import LoginModal from "../../src/component/LoginModal";
-import { useEffect, useState } from "react";
-import PolicyModal from "../../src/component/PolicyModal";
-import RegisterModal from "../../src/component/RegisterModal";
+import { useContext, useEffect, useState } from "react";
 import { NextRouter, useRouter } from "next/router";
-import VoteView from "../../src/component/VoteView";
-import Vote from "../../src/component/Vote";
+import { css } from "@emotion/react";
+import { ThemeColorContext } from "../../context/Theme";
+import Header from "../../component/Header";
+import LoginModal from "../../component/LoginModal";
+import PolicyModal from "../../component/PolicyModal";
+import RegisterModal from "../../component/RegisterModal";
+import Footer from "../../component/Footer";
+import VoteView from "../../component/VoteView";
+import Vote from "../../component/Vote";
 
 const wrapper = css`
   height: auto;
@@ -18,12 +19,18 @@ const wrapper = css`
 export default function Home() {
   const [modalState, setModalState] = useState<string>("");
   const [voteId, setVoteId] = useState<number>(undefined);
+  const { themeColor, toggleThemeColor } = useContext(ThemeColorContext);
 
   const router: NextRouter = useRouter();
 
   useEffect(() => {
     if (router.isReady) {
       setVoteId(parseInt(router.query.id[0]));
+      if (
+        localStorage.getItem("themeColor") &&
+        themeColor !== localStorage.getItem("themeColor")
+      )
+        toggleThemeColor();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
@@ -31,24 +38,35 @@ export default function Home() {
   return (
     <>
       <div css={wrapper}>
-        {modalState === "login" && <LoginModal setModalState={setModalState} />}
+        {modalState === "login" && (
+          <LoginModal
+            setModalState={setModalState}
+            themeId={`${themeColor}0`}
+          />
+        )}
         {modalState === "policy" && (
-          <PolicyModal setModalState={setModalState} />
+          <PolicyModal
+            setModalState={setModalState}
+            themeId={`${themeColor}0`}
+          />
         )}
         {modalState === "register" && (
-          <RegisterModal setModalState={setModalState} />
+          <RegisterModal
+            setModalState={setModalState}
+            themeId={`${themeColor}0`}
+          />
         )}
 
         <Header setModalState={setModalState} />
 
         {voteId && (
           <>
-            <VoteView voteId={voteId - 1} />
-            <Vote />
+            <VoteView voteId={voteId - 1} themeId={`${themeColor}0`} />
+            <Vote themeId={`${themeColor}0`} />
           </>
         )}
       </div>
-      <Footer />
+      <Footer themeId={`${themeColor}0`} />
     </>
   );
 }
