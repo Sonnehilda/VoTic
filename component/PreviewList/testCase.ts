@@ -1,20 +1,14 @@
-export interface testCaseType {
-  key: number;
-  title: string;
-  date?: string;
-  status: number;
-  creator?: string;
-  image?: string;
-}
+import { VoteValueType } from "../../types/voteValue";
 
-export const testCase: testCaseType[] = [
+export const testCase: VoteValueType[] = [
   {
     key: 1,
-    title: "1 대충 멋진 투표 이름",
+    title: "어떤 맛의 우유를 좋아하시나요?",
     date: "2022-06-17",
-    status: 24,
-    creator: "username",
-    image: "https://wallpaperaccess.com/full/210538.jpg",
+    status: 2018015,
+    creator: "Sonnehilda",
+    image:
+      "https://www.foodsafetynews.com/files/2021/06/illustration-milk-in-glass.jpg",
   },
   {
     key: 2,

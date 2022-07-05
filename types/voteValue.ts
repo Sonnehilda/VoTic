@@ -1,9 +1,9 @@
 export type VoteValueType = {
-  index: number;
+  index?: number;
+  key: number;
   title: string;
-  date: string;
+  date?: string;
   status: number;
-  creator: string;
-  image: string;
-  size?: string;
+  creator?: string;
+  image?: string;
 };
