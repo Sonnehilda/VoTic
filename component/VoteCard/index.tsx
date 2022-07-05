@@ -1,8 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-import { vote } from "../../../public/images";
 import { css } from "@emotion/react";
+import theme, { ThemeProps } from "../../styles/theme";
+import { vote } from "../../public/images";
 import Router from "next/router";
-import { VoteValueType } from "../../../types/voteValue";
+import { VoteValueType } from "../../types/voteValue";
+
+interface VoteCardProps {
+  size?: string;
+}
 
 const VoteCard = ({
   index,
@@ -12,10 +17,11 @@ const VoteCard = ({
   status,
   date,
   size,
-}: VoteValueType) => {
+  themeId,
+}: VoteValueType & VoteCardProps & ThemeProps) => {
   return (
     <div
-      css={() => backgroundStyle(size)}
+      css={() => backgroundStyle(themeId, size)}
       onClick={() => Router.push(`/vote/${index}`)}
     >
       <img css={contentImage} src={image} alt="image" />
@@ -24,25 +30,27 @@ const VoteCard = ({
         <span>{creator}</span>
       </div>
       <div css={contentInfo}>
-        <img css={statusIcon} src={vote.src} alt="" />
-        <span>{status}</span>
+        <img css={() => statusIcon(themeId)} src={vote.src} alt="" />
+        <span>{status.toLocaleString()}</span>
         <span>{date}</span>
       </div>
     </div>
   );
 };
 
-const backgroundStyle = (size: string) => css`
+const backgroundStyle = (themeId: string, size: string) => css`
   ${size !== "fixed"
     ? "margin-right: 0.5rem; width: 20rem;"
     : "margin-top: 0.5rem; margin-right: 1%; width: 19%;"}
 
-  background-color: #efefef;
+  background-color: ${theme[themeId.replace("0", "1")].background};
 
   height: 12.5rem;
   border-radius: 0.5rem;
 
   display: inline-block;
+
+  color: ${theme[themeId].color};
 
   transition: filter 0.25s ease;
   cursor: pointer;
@@ -53,10 +61,6 @@ const backgroundStyle = (size: string) => css`
 
   :last-of-type {
     margin-right: 0;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    background-color: #333;
   }
 `;
 
@@ -88,14 +92,13 @@ const contentInfo = css`
     overflow: hidden;
 
     :first-of-type {
-      width: 70%;
+      width: 75%;
 
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: 400;
-      text-align: left;
     }
     :last-of-type {
-      width: 30%;
+      width: 25%;
 
       font-size: 0.75rem;
       font-weight: 100;
@@ -104,12 +107,16 @@ const contentInfo = css`
   }
 `;
 
-const statusIcon = css`
+const statusIcon = (themeId: string) => css`
   margin-top: 0.1rem;
   margin-right: 0.25rem;
 
   width: 0.75rem;
   height: 0.75rem;
+
+  transition: filter 0.25s ease;
+
+  ${themeId === "light0" ? "filter: invert(100%);" : "filter: invert(0%);"}
 `;
 
 export default VoteCard;
