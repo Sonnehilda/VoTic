@@ -1,11 +1,15 @@
-import { css } from "@emotion/react";
 import { useRef } from "react";
+import { css } from "@emotion/react";
+import theme, { ThemeProps } from "../../styles/theme";
 
 interface LoginModalProps {
   setModalState: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const LoginModal = ({ setModalState }: LoginModalProps) => {
+const LoginModal = ({
+  setModalState,
+  themeId,
+}: LoginModalProps & ThemeProps) => {
   const filterRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -16,24 +20,24 @@ const LoginModal = ({ setModalState }: LoginModalProps) => {
         if (e.target === filterRef.current) setModalState("");
       }}
     >
-      <div css={backgroundStyle}>
+      <div css={() => backgroundStyle(themeId)}>
         <div css={titleStyle}>
           <h1>로그인</h1>
           <span onClick={() => setModalState("")}>✕</span>
         </div>
         <form>
-          <div css={inputStyle}>
+          <div css={() => inputStyle(themeId)}>
             <label htmlFor="id">아이디</label>
             <input id="id" type="id" autoComplete="off" />
           </div>
-          <div css={inputStyle}>
+          <div css={() => inputStyle(themeId)}>
             <label htmlFor="pw">
               비밀번호
               <span>대 · 소문자 & 특수문자 조합</span>
             </label>
             <input id="pw" type="password" />
           </div>
-          <button css={buttonStyle}>로그인</button>
+          <button css={() => buttonStyle(themeId)}>로그인</button>
         </form>
         <div css={checkboxWrapper}>
           <input id="checkbox" type="checkbox" />
@@ -67,8 +71,8 @@ const darkFilter = css`
   z-index: 2;
 `;
 
-const backgroundStyle = css`
-  background-color: #f6f6f6;
+const backgroundStyle = (themeId: string) => css`
+  background-color: ${theme[themeId].background};
 
   position: fixed;
 
@@ -79,6 +83,8 @@ const backgroundStyle = css`
   padding-bottom: 0.5rem;
 
   width: 20rem;
+
+  color: ${theme[themeId].color};
 
   border-radius: 0.5rem;
   z-index: 3;
@@ -98,7 +104,7 @@ const titleStyle = css`
   }
 `;
 
-const inputStyle = css`
+const inputStyle = (themeId: string) => css`
   margin: 0 auto;
 
   width: 17rem;
@@ -122,7 +128,7 @@ const inputStyle = css`
   input {
     all: unset;
 
-    background-color: #efefef;
+    background-color: ${theme[themeId.replace("0", "1")].background};
 
     padding: 0.25rem;
     padding-left: 0.5rem;
@@ -138,10 +144,10 @@ const inputStyle = css`
   }
 `;
 
-const buttonStyle = css`
+const buttonStyle = (themeId: string) => css`
   all: unset;
 
-  background-color: #efefef;
+  background-color: ${theme[themeId.replace("0", "1")].background};
 
   padding: 0.25rem;
   margin: 0 auto;
@@ -158,12 +164,12 @@ const buttonStyle = css`
   font-size: 0.75rem;
   text-align: center;
 
-  transition: filter 0.25s ease;
+  transition: background-color 0.25s ease;
   border-radius: 0.5rem;
   cursor: pointer;
 
   :hover {
-    filter: brightness(95%);
+    background-color: ${theme[themeId.replace("0", "1")].hoverBackground};
   }
 `;
 
@@ -201,7 +207,7 @@ const linkWrapper = css`
   span {
     margin: 0.25rem;
 
-    color: blue;
+    color: #00ffab;
     text-decoration: underline;
 
     cursor: pointer;
