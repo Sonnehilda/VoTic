@@ -109,7 +109,7 @@ const backgroundStyle = (themeId: string) => css`
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
 
   width: 20rem;
 
@@ -147,7 +147,7 @@ const titleWrapper = css`
     width: 6rem;
 
     color: #a1a1a1;
-    font-size: 1.5vh;
+    font-size: 0.25rem;
     text-align: center;
   }
 `;
@@ -164,11 +164,11 @@ const contentWrapper = (themeId: string) => css`
   justify-content: space-between;
   align-items: center;
 
-  border-top: 0.1vh solid
+  border-top: 0.1px solid
     ${themeId.includes("light")
       ? theme[themeId.replace("light", "dark")].background
       : theme[themeId.replace("dark", "light")].background};
-  border-bottom: 0.1vh solid
+  border-bottom: 0.1px solid
     ${themeId.includes("light")
       ? theme[themeId.replace("light", "dark")].background
       : theme[themeId.replace("dark", "light")].background};
@@ -181,7 +181,7 @@ const contentWrapper = (themeId: string) => css`
     justify-content: center;
     align-items: center;
 
-    font-size: 1.5vh;
+    font-size: 0.25rem;
     text-align: center;
   }
 `;
