@@ -2,18 +2,39 @@
 import { css } from "@emotion/react";
 import { search, user, sun, moon } from "../../public/images";
 import Router from "next/router";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemeColorContext } from "../../context/Theme";
+import theme, { ThemeProps } from "../../styles/theme";
 
 interface HeaderProps {
   setModalState: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Header = ({ setModalState }: HeaderProps) => {
+const Header = ({ setModalState, themeId }: HeaderProps & ThemeProps) => {
+  const [dropDownState, setDropDownState] = useState<boolean>(false);
+  const [hideHeaderState, setHideHeaderState] = useState<boolean>(false);
+
   const { themeColor, toggleThemeColor } = useContext(ThemeColorContext);
 
+  useEffect(() => {
+    let prevScrollTop = 0;
+    const toggleHeader = () => {
+      const nextScrollTop = window.pageYOffset || 0;
+      if (prevScrollTop > 45 && nextScrollTop > prevScrollTop) {
+        setDropDownState(false);
+        setHideHeaderState(true);
+      } else if (nextScrollTop < prevScrollTop) {
+        setHideHeaderState(false);
+      }
+      prevScrollTop = nextScrollTop;
+    };
+    document.addEventListener("scroll", toggleHeader);
+    return () => document.removeEventListener("scroll", toggleHeader);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <header css={backgroundStyle}>
+    <header css={() => backgroundStyle(hideHeaderState)}>
       <div>
         <div css={linkStyle} onClick={() => Router.push("/")}>
           <span>V</span>o<span>T</span>ic
@@ -30,9 +51,23 @@ const Header = ({ setModalState }: HeaderProps) => {
         <input css={inputStyle} type="text" placeholder="검색" />
         <img css={inputIcon} src={`${search.src}`} alt="" />
       </form>
-      <div css={userStyle} onClick={() => setModalState("login")}>
-        <span>로그인</span>
-        <img css={userIcon} src={`${user.src}`} alt="User Icon" />
+      <div>
+        {dropDownState === true && (
+          <div css={() => dropDownStateStyle(themeId)}>
+            <button>내 정보</button>
+            <button>새 투표 만들기</button>
+          </div>
+        )}
+        <div
+          css={userStyle}
+          onClick={() => {
+            if (!false) setModalState("login");
+            else setDropDownState(!dropDownState);
+          }}
+        >
+          {false ? <span>로그인</span> : <span>{"Sonnehilda"}</span>}
+          <img css={userIcon} src={`${user.src}`} alt="User Icon" />
+        </div>
       </div>
     </header>
   );
@@ -40,17 +75,25 @@ const Header = ({ setModalState }: HeaderProps) => {
 
 export default Header;
 
-const backgroundStyle = css`
+const backgroundStyle = (hideHeaderState: boolean) => css`
+  position: fixed;
+
+  ${hideHeaderState ? "top: -3rem;" : "top: 0;"}
+
   background-color: #00ffab;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-bottom: 0.15rem;
 
+  width: 100%;
   height: 3rem;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  transition: top 0.25s ease;
+  z-index: 2;
 
   div {
     display: flex;
@@ -221,5 +264,92 @@ const themeColorIcon = css`
 
     overflow: hidden;
     transition: filter 0.15s ease;
+  }
+`;
+
+const dropDownStateStyle = (themeId: string) => css`
+  position: absolute;
+
+  transform: translateX(0.5rem) translateY(4.15rem);
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  width: 7.5rem;
+
+  z-index: 2;
+
+  button {
+    all: unset;
+
+    background-color: ${theme[themeId.replace("0", "1")].background};
+
+    width: 7.5rem;
+    height: 2.5rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: ${theme[themeId].color};
+    font-size: 0.75rem;
+
+    transition: background-color 0.25s ease;
+    border: 0.1vh solid #000;
+    border-bottom: 0;
+    cursor: pointer;
+
+    :first-child {
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+    }
+
+    :last-child {
+      border-bottom: 0.1px solid #000;
+      border-bottom-left-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+    }
+
+    :first-of-type:before {
+      position: absolute;
+
+      transform: translateX(2.5rem) translateY(-1.5rem);
+
+      width: 0;
+      height: 0;
+
+      border-bottom: 0.6rem solid ${theme[themeId.replace("0", "1")].background};
+      border-left: 0.3rem solid transparent;
+      border-right: 0.3rem solid transparent;
+
+      content: " ";
+
+      z-index: 1;
+    }
+
+    :first-of-type:after {
+      position: absolute;
+
+      transform: translateX(2.5rem) translateY(-1.6rem);
+
+      width: 0;
+      height: 0;
+
+      border-bottom: 0.6rem solid #000;
+      border-left: 0.3rem solid transparent;
+      border-right: 0.3rem solid transparent;
+
+      content: " ";
+    }
+
+    :hover {
+      background-color: ${theme[themeId.replace("0", "1")].hoverBackground};
+
+      :first-of-type:before {
+        border-bottom: 0.6rem solid
+          ${theme[themeId.replace("0", "1")].hoverBackground};
+      }
+    }
   }
 `;
