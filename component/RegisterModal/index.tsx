@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { css } from "@emotion/react";
 import theme, { ThemeProps } from "../../styles/theme";
 
@@ -11,12 +11,73 @@ const RegisterModal = ({
   themeId,
 }: RegisterModalProps & ThemeProps) => {
   const filterRef = useRef<HTMLDivElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+
+  const [pwWarning, setPwWarning] = useState<number>(0);
+  const [emailWarning, setEmailWarning] = useState<number>(0);
+  const [email, setEmail] = useState<string>("");
+
+  const validateForm = (e: React.FormEvent<HTMLFormElement>): boolean => {
+    if (
+      e.target[0].value != "" && // 아이디 input
+      e.target[1].value != "" && // 비밀번호 input
+      e.target[2].value != "" && // 비밀번호 확인 input
+      e.target[3].value != "" && // 이메일 input
+      e.target[4].value != "" // 이메일 인증 코드 input
+    ) {
+      if (e.target[1].value !== e.target[2].value) {
+        setPwWarning(4);
+        return false;
+      }
+      if (e.target[1].value.length < 8) {
+        setPwWarning(1);
+        return false;
+      }
+      if (
+        e.target[1].value.search(/[a-z]/) === -1 ||
+        e.target[1].value.search(/[A-Z]/) === -1
+      ) {
+        setPwWarning(2);
+        return false;
+      }
+      if (e.target[1].value.search(/\W|\s/g) === -1) {
+        setPwWarning(3);
+        return false;
+      }
+      if (validateEmail()) {
+        if (e.target[3].value != email) {
+          setEmailWarning(3);
+          return false;
+        }
+        if (pwWarning != 0) setPwWarning(0);
+        return true;
+      } else {
+        if (pwWarning != 0) setPwWarning(0);
+        return false;
+      }
+    } else {
+      alert("값이 입력되지 않은 부분이 있습니다.");
+      return false;
+    }
+  };
+
+  const validateEmail = (): boolean => {
+    const regex =
+      /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+    if (!regex.test(emailRef.current.value)) {
+      setEmailWarning(1);
+      return false;
+    } else {
+      if (emailWarning != 0) setEmailWarning(0);
+      return true;
+    }
+  };
 
   return (
     <div
       ref={filterRef}
       css={darkFilter}
-      onMouseDown={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      onMouseDown={(e: React.MouseEvent<HTMLDivElement>) => {
         if (e.target === filterRef.current) setModalState("");
       }}
     >
@@ -25,7 +86,12 @@ const RegisterModal = ({
           <h1>회원가입</h1>
           <span onClick={() => setModalState("policy")}>←</span>
         </div>
-        <form>
+        <form
+          onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
+            if (validateForm(e)) console.log("REGISTERED");
+          }}
+        >
           <div css={() => inputStyle(themeId)}>
             <label htmlFor="id">
               아이디
@@ -36,11 +102,19 @@ const RegisterModal = ({
           <div css={() => inputStyle(themeId)}>
             <label htmlFor="pw">
               비밀번호
-              {false ? <strong>8자리 이상</strong> : <span>8자리 이상</span>}
+              {pwWarning === 1 ? (
+                <strong>8자리 이상</strong>
+              ) : (
+                <span>8자리 이상</span>
+              )}
               <span>,</span>
-              {false ? <strong>대 · 소문자</strong> : <span>대 · 소문자</span>}
+              {pwWarning === 2 ? (
+                <strong>대 · 소문자</strong>
+              ) : (
+                <span>대 · 소문자</span>
+              )}
               <span>&</span>
-              {false ? (
+              {pwWarning === 3 ? (
                 <strong>특수문자 조합</strong>
               ) : (
                 <span>특수문자 조합</span>
@@ -49,15 +123,52 @@ const RegisterModal = ({
             <input id="pw" type="password" />
           </div>
           <div css={() => inputStyle(themeId)}>
-            <label htmlFor="email">이메일</label>
-            <input id="email" type="email" autoComplete="off" />
+            <label htmlFor="checkpw">
+              비밀번호 확인
+              {pwWarning === 4 && (
+                <strong>비밀번호가 일치하지 않습니다.</strong>
+              )}
+            </label>
+            <input id="checkpw" type="password" autoComplete="off" />
+          </div>
+          <div css={() => inputStyle(themeId)}>
+            <label htmlFor="email">
+              이메일
+              {emailWarning === 1 ? (
+                <strong>이메일 형식이 올바르지 않습니다.</strong>
+              ) : emailWarning === 2 ? (
+                <strong>해당 이메일로 가입된 회원이 존재합니다.</strong>
+              ) : (
+                emailWarning === 3 && (
+                  <strong>알 수 없는 오류가 발생하였습니다.</strong>
+                )
+              )}
+            </label>
+            <input
+              id="email"
+              type=""
+              autoComplete="off"
+              disabled={email === "" ? false : true}
+              ref={emailRef}
+            />
           </div>
           <div css={() => inputStyle(themeId)}>
             <label htmlFor="verify">
               이메일 인증 코드
               {false && <strong>코드가 올바르지 않습니다.</strong>}
             </label>
-            <input id="verify" type="verify" autoComplete="off" />
+            <input id="verify" autoComplete="off" />
+            {email === "" ? (
+              <span
+                onClick={() => {
+                  if (validateEmail()) setEmail(emailRef.current.value);
+                }}
+              >
+                전송 요청
+              </span>
+            ) : (
+              <span>인증</span>
+            )}
           </div>
           <button css={() => buttonStyle(themeId)}>회원가입</button>
         </form>
@@ -87,7 +198,7 @@ const backgroundStyle = (themeId: string) => css`
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
 
   width: 20rem;
 
@@ -126,6 +237,8 @@ const inputStyle = (themeId: string) => css`
     font-size: 0.25rem;
 
     span {
+      all: unset;
+
       margin-left: 0.25rem;
 
       color: #a1a1a1;
@@ -147,10 +260,10 @@ const inputStyle = (themeId: string) => css`
 
     padding: 0.25rem;
     padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-right: 3.5rem;
     margin-bottom: 0.75rem;
 
-    width: 16rem;
+    width: 13rem;
     height: 1.5rem;
 
     font-size: 0.75rem;
@@ -161,6 +274,29 @@ const inputStyle = (themeId: string) => css`
     :disabled {
       background-color: ${theme[themeId.replace("0", "2")].background};
     }
+
+    :last-child {
+      width: 16rem;
+      padding-right: 0.5rem;
+    }
+  }
+
+  span {
+    background-color: ${theme[themeId.replace("0", "1")].background};
+
+    position: absolute;
+
+    width: 3rem;
+
+    display: flex;
+    justify-content: right;
+    align-items: center;
+
+    transform: translateX(13.6rem) translateY(1.65rem);
+
+    font-size: 0.25rem;
+
+    cursor: pointer;
   }
 `;
 
