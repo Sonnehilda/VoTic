@@ -11,11 +11,6 @@ import Footer from "../../component/Footer";
 import VoteView from "../../component/VoteView";
 import Vote from "../../component/Vote";
 
-const wrapper = css`
-  height: auto;
-  min-height: calc(100vh - 6rem);
-`;
-
 export default function Home() {
   const [modalState, setModalState] = useState<string>("");
   const [voteId, setVoteId] = useState<number>(undefined);
@@ -37,6 +32,7 @@ export default function Home() {
 
   return (
     <>
+      <Header setModalState={setModalState} themeId={`${themeColor}0`} />
       <div css={wrapper}>
         {modalState === "login" && (
           <LoginModal
@@ -57,8 +53,6 @@ export default function Home() {
           />
         )}
 
-        <Header setModalState={setModalState} />
-
         {voteId && (
           <>
             <VoteView voteId={voteId - 1} themeId={`${themeColor}0`} />
@@ -70,3 +64,10 @@ export default function Home() {
     </>
   );
 }
+
+const wrapper = css`
+  padding-top: 3rem;
+
+  height: auto;
+  min-height: calc(100vh - 6rem);
+`;

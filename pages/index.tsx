@@ -29,6 +29,7 @@ export default function Home() {
 
   return (
     <>
+      <Header setModalState={setModalState} themeId={`${themeColor}0`} />
       <div css={wrapper}>
         {modalState === "login" && (
           <LoginModal
@@ -49,8 +50,6 @@ export default function Home() {
           />
         )}
 
-        <Header setModalState={setModalState} />
-
         <PreviewList
           title={"인기 급상승 투표"}
           type={"popularity"}
@@ -69,6 +68,8 @@ export default function Home() {
 }
 
 const wrapper = css`
+  padding-top: 3rem;
+
   height: auto;
   min-height: calc(100vh - 6rem);
 `;

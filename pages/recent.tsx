@@ -28,6 +28,7 @@ export default function Recent() {
 
   return (
     <>
+      <Header setModalState={setModalState} themeId={`${themeColor}0`} />
       <div css={wrapper}>
         {modalState === "login" && (
           <LoginModal
@@ -48,7 +49,6 @@ export default function Recent() {
           />
         )}
 
-        <Header setModalState={setModalState} />
         <FullViewList
           title="최근에 생성된 투표"
           type="recent"
@@ -61,6 +61,8 @@ export default function Recent() {
 }
 
 const wrapper = css`
+  padding-top: 3rem;
+
   height: auto;
   min-height: calc(100vh - 6rem);
 `;

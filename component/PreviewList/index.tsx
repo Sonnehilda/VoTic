@@ -199,10 +199,9 @@ const scrollStyle = (themeId: string) => css`
   align-items: center;
 
   border-radius: 0.5rem;
-  transition: filter 0.25s ease;
   cursor: pointer;
 
   :hover {
-    filter: brightness(95%);
+    background-color: ${theme[themeId.replace("0", "1")].hoverBackground};
   }
 `;

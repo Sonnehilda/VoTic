@@ -80,12 +80,13 @@ export default LoginModal;
 
 const darkFilter = css`
   background-color: rgba(0, 0, 0, 0.1);
+
   position: fixed;
 
   width: 100vw;
   height: 100vh;
 
-  z-index: 2;
+  z-index: 3;
 `;
 
 const backgroundStyle = (themeId: string) => css`
