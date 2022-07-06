@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { css } from "@emotion/react";
 import theme, { ThemeProps } from "../../styles/theme";
 
@@ -11,6 +11,18 @@ const LoginModal = ({
   themeId,
 }: LoginModalProps & ThemeProps) => {
   const filterRef = useRef<HTMLDivElement>(null);
+
+  const validateForm = (e: React.FormEvent<HTMLFormElement>): boolean => {
+    if (
+      e.target[0].value != "" && // 아이디 input
+      e.target[1].value != "" // 비밀번호 input
+    ) {
+      return true;
+    } else {
+      alert("아이디 또는 비밀번호를 확인해주세요.");
+      return false;
+    }
+  };
 
   return (
     <div
@@ -25,7 +37,12 @@ const LoginModal = ({
           <h1>로그인</h1>
           <span onClick={() => setModalState("")}>✕</span>
         </div>
-        <form>
+        <form
+          onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
+            validateForm(e);
+          }}
+        >
           <div css={() => inputStyle(themeId)}>
             <label htmlFor="id">아이디</label>
             <input id="id" type="id" autoComplete="off" />
@@ -33,7 +50,7 @@ const LoginModal = ({
           <div css={() => inputStyle(themeId)}>
             <label htmlFor="pw">
               비밀번호
-              <span>대 · 소문자 & 특수문자 조합</span>
+              <span>8자리 이상 , 대 · 소문자 & 특수문자 조합</span>
             </label>
             <input id="pw" type="password" />
           </div>
