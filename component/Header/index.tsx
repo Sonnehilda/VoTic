@@ -128,7 +128,7 @@ const backgroundStyle = (hideHeaderState: boolean) => css`
     flex-direction: row-reverse;
     align-items: center;
 
-    @media screen and (max-width: 360px) {
+    @media screen and (max-width: 300px) {
       display: none !important;
     }
   }
