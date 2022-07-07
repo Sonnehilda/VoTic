@@ -30,32 +30,37 @@ const Vote = ({ themeId }: ThemeProps) => {
     const Timer = setInterval(() => {
       scrollRef.current.forEach((v, i) => {
         setTimeout(() => {
-          if (v.scrollWidth > v.clientWidth && modeRef.current[i] != -1) {
-            if (
-              v.scrollLeft - (v.scrollWidth - v.clientWidth) < 2 &&
-              v.scrollLeft - (v.scrollWidth - v.clientWidth) > -2
-            ) {
-              if (modeRef.current[i] === undefined) modeRef.current[i] = true;
-              else modeRef.current[i] = !modeRef.current[i];
+          try {
+            if (v.scrollWidth > v.clientWidth && modeRef.current[i] != -1) {
+              if (
+                v.scrollLeft - (v.scrollWidth - v.clientWidth) < 2 &&
+                v.scrollLeft - (v.scrollWidth - v.clientWidth) > -2
+              ) {
+                if (modeRef.current[i] === undefined) modeRef.current[i] = true;
+                else modeRef.current[i] = !modeRef.current[i];
+              }
+              if (v.scrollLeft <= 0 && modeRef.current[i] !== undefined) {
+                modeRef.current[i] = !modeRef.current[i];
+              }
+              if (modeRef.current[i] === true)
+                v.scrollTo({
+                  top: 0,
+                  left: v.scrollLeft - 7.5,
+                  behavior: "smooth",
+                });
+              if (
+                modeRef.current[i] === false ||
+                modeRef.current[i] === undefined
+              )
+                v.scrollTo({
+                  top: 0,
+                  left: v.scrollLeft + 7.5,
+                  behavior: "smooth",
+                });
             }
-            if (v.scrollLeft <= 0 && modeRef.current[i] !== undefined) {
-              modeRef.current[i] = !modeRef.current[i];
-            }
-            if (modeRef.current[i] === true)
-              v.scrollTo({
-                top: 0,
-                left: v.scrollLeft - 7.5,
-                behavior: "smooth",
-              });
-            if (
-              modeRef.current[i] === false ||
-              modeRef.current[i] === undefined
-            )
-              v.scrollTo({
-                top: 0,
-                left: v.scrollLeft + 7.5,
-                behavior: "smooth",
-              });
+          } catch {
+            clearInterval(Timer);
+            return;
           }
         });
       });
