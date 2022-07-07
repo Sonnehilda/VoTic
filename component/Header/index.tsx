@@ -64,11 +64,15 @@ const Header = ({ setModalState, themeId }: HeaderProps & ThemeProps) => {
         <div
           css={userStyle}
           onClick={() => {
-            if (false) setModalState("login");
+            if (!false) setModalState("login");
             else setDropDownState(!dropDownState);
           }}
         >
-          {false ? <span>로그인</span> : <span>{"Sonnehilda"}</span>}
+          {false ? (
+            <span>로그인</span>
+          ) : (
+            <span>{"SonnehildaSonnehildaSonnehilda"}</span>
+          )}
           <img css={userIcon} src={`${user.src}`} alt="User Icon" />
         </div>
       </div>
@@ -123,6 +127,10 @@ const backgroundStyle = (hideHeaderState: boolean) => css`
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
+
+    @media screen and (max-width: 360px) {
+      display: none !important;
+    }
   }
 `;
 
@@ -212,6 +220,8 @@ const userStyle = css`
   span {
     padding-right: 0.5rem;
 
+    width: 50%;
+
     color: #fff;
     font-size: 0.75rem;
     font-weight: 100;
@@ -220,6 +230,10 @@ const userStyle = css`
     white-space: nowrap;
 
     overflow: hidden;
+
+    @media screen and (max-width: 480px) {
+      display: none !important;
+    }
   }
 `;
 
@@ -239,6 +253,10 @@ const userIcon = css`
 const themeColorIcon = css`
   cursor: pointer;
 
+  @media screen and (max-device-width: 400px) {
+    display: none !important;
+  }
+
   img {
     margin-top: 0.2rem;
     margin-left: 0.5rem;
@@ -247,6 +265,10 @@ const themeColorIcon = css`
     height: 1.25rem;
 
     transition: filter 0.15s ease;
+
+    @media screen and (max-width: 400px) {
+      display: none !important;
+    }
   }
 
   :hover img,
@@ -267,6 +289,10 @@ const themeColorIcon = css`
 
     overflow: hidden;
     transition: filter 0.15s ease;
+
+    @media screen and (max-width: 600px) {
+      display: none !important;
+    }
   }
 `;
 
@@ -303,12 +329,12 @@ const dropDownStateStyle = (themeId: string) => css`
     border-bottom: 0;
     cursor: pointer;
 
-    :first-child {
+    :first-of-type {
       border-top-left-radius: 0.5rem;
       border-top-right-radius: 0.5rem;
     }
 
-    :last-child {
+    :last-of-type {
       border-bottom: 0.1px solid #000;
       border-bottom-left-radius: 0.5rem;
       border-bottom-right-radius: 0.5rem;
