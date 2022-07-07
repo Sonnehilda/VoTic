@@ -41,7 +41,7 @@ const VoteCard = ({
 const backgroundStyle = (themeId: string, size: string) => css`
   ${size !== "fixed"
     ? "margin-right: 0.5rem; width: 20rem;"
-    : "margin-top: 0.5rem; margin-right: 1%; width: 19%;"}
+    : "margin-top: 0.5rem; margin-right: 1%; width: 19%; @media screen and (max-height: 600px) { margin-top: 0.5rem; margin-right: 1%; width: 49%; }"}
 
   background-color: ${theme[themeId.replace("0", "1")].background};
 
