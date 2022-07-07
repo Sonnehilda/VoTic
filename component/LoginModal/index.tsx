@@ -63,11 +63,6 @@ const LoginModal = ({
           </label>
         </div>
         <div css={linkWrapper}>
-          <span>아이디 찾기</span>
-          <strong>|</strong>
-          <span>비밀번호 찾기</span>
-        </div>
-        <div css={linkWrapper}>
           <strong>회원이 아니신가요?</strong>
           <span onClick={() => setModalState("policy")}>회원가입</span>
         </div>
@@ -208,6 +203,7 @@ const labelStyle = css`
 
 const linkWrapper = css`
   margin: 0 auto;
+  margin-top: 0.5rem;
 
   display: flex;
   justify-content: center;

@@ -38,7 +38,7 @@ const WriteVote = ({ titleRef, themeId }: WriteVoteProps & ThemeProps) => {
           ref={titleRef}
           id="title"
           autoComplete="off"
-          placeholder="글의 제목을 입력하세요."
+          placeholder="투표의 제목을 입력하세요."
         />
       </div>
       <div css={() => imgInput(themeId, previewImage)}>

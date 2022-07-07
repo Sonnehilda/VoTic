@@ -64,15 +64,9 @@ const infoWrapper = (themeId: string) => css`
 `;
 
 const contentInfo = css`
-  height: 2rem;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  :first-of-type {
-    margin-top: 0.5rem;
-  }
 
   :last-of-type {
     padding-bottom: 0.25rem;
@@ -93,9 +87,12 @@ const contentInfo = css`
   }
 
   span {
+    width: 5.4rem;
+
     color: #a1a1a1;
     font-size: 0.9rem;
     font-weight: 300;
+    text-align: right;
   }
 
   img {

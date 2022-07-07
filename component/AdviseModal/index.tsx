@@ -139,7 +139,9 @@ const labelStyle = css`
 const buttonStyle = (themeId: string) => css`
   all: unset;
 
-  background-color: ${theme[themeId.replace("0", "1")].background};
+  ${themeId.includes("light")
+    ? `background-color: ${theme[themeId.replace("0", "1")].background};`
+    : `background-color: ${theme[themeId.replace("0", "2")].background};`}
 
   padding: 0.25rem;
   margin: 0 auto;
@@ -164,10 +166,16 @@ const buttonStyle = (themeId: string) => css`
   }
 
   :hover:enabled {
-    background-color: ${theme[themeId.replace("0", "1")].hoverBackground};
+    ${themeId.includes("light")
+      ? `background-color: ${theme[themeId.replace("0", "2")].hoverBackground};`
+      : `background-color: ${
+          theme[themeId.replace("0", "1")].hoverBackground
+        };`}
   }
 
   :disabled {
-    background-color: ${theme[themeId.replace("0", "2")].background};
+    ${themeId.includes("light")
+      ? `background-color: ${theme[themeId.replace("0", "2")].background};`
+      : `background-color: ${theme[themeId.replace("0", "1")].background};`}
   }
 `;
