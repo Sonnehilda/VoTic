@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { css } from "@emotion/react";
 import theme, { ThemeProps } from "../../styles/theme";
 import { VoteValueType } from "../../types/voteValue";
+import { useRef } from "react";
 
 const Vote = ({ themeId }: ThemeProps) => {
   const data: VoteValueType[] = [
@@ -12,6 +13,11 @@ const Vote = ({ themeId }: ThemeProps) => {
     { key: 3, title: "커피 우유", status: 121736 },
     { key: 4, title: "딸기 우유", status: 86771 },
   ];
+
+  const scrollRef = useRef<HTMLSpanElement[]>([]);
+  const modeRef = useRef<boolean[] | number[]>([false]);
+  const tempRef = useRef<boolean | number>(false);
+
   const [totalStatus, setTotalStatus] = useState<number>(0);
 
   useEffect(() => {
@@ -20,6 +26,43 @@ const Vote = ({ themeId }: ThemeProps) => {
       temp += v.status;
     });
     setTotalStatus(temp);
+
+    const Timer = setInterval(() => {
+      scrollRef.current.forEach((v, i) => {
+        setTimeout(() => {
+          if (v.scrollWidth > v.clientWidth && modeRef.current[i] != -1) {
+            if (
+              v.scrollLeft - (v.scrollWidth - v.clientWidth) < 2 &&
+              v.scrollLeft - (v.scrollWidth - v.clientWidth) > -2
+            ) {
+              if (modeRef.current[i] === undefined) modeRef.current[i] = true;
+              else modeRef.current[i] = !modeRef.current[i];
+            }
+            if (v.scrollLeft <= 0 && modeRef.current[i] !== undefined) {
+              modeRef.current[i] = !modeRef.current[i];
+            }
+            if (modeRef.current[i] === true)
+              v.scrollTo({
+                top: 0,
+                left: v.scrollLeft - 7.5,
+                behavior: "smooth",
+              });
+            if (
+              modeRef.current[i] === false ||
+              modeRef.current[i] === undefined
+            )
+              v.scrollTo({
+                top: 0,
+                left: v.scrollLeft + 7.5,
+                behavior: "smooth",
+              });
+          }
+        });
+      });
+    }, 100);
+    return () => {
+      clearInterval(Timer);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -31,11 +74,20 @@ const Vote = ({ themeId }: ThemeProps) => {
       {data.map((v) => {
         return (
           <button
-            key={v.title}
+            key={v.key}
             css={() => optionStyle(themeId, (100 / totalStatus) * v.status)}
           >
-            <span>
-              <strong />
+            <strong />
+            <span
+              onMouseEnter={() => {
+                tempRef.current = modeRef.current[v.key];
+                modeRef.current[v.key] = -1;
+              }}
+              onMouseLeave={() => {
+                tempRef.current = modeRef.current[v.key] = tempRef.current;
+              }}
+              ref={(span) => (scrollRef.current[v.key] = span)}
+            >
               {v.title} ({((100 / totalStatus) * v.status).toFixed(1)}%)
               <span css={detailStyle}>({v.status.toLocaleString()}표)</span>
             </span>
@@ -100,16 +152,32 @@ const optionStyle = (themeId: string, gauge: number) => css`
   span {
     position: relative;
 
-    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
 
-    justify-content: center;
-    align-items: center;
+    width: 100%;
 
     font-size: 0.85rem;
     text-align: center;
     white-space: nowrap;
 
+    overflow-x: scroll;
     z-index: 1;
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    ::-webkit-scrollbar-track {
+      display: none;
+    }
+    ::-webkit-scrollbar-thumb {
+      display: none;
+    }
+
+    span {
+      padding: 0;
+      padding-left: 0.25rem;
+    }
 
     @media screen and (max-height: 240px) {
       span {
@@ -122,16 +190,13 @@ const optionStyle = (themeId: string, gauge: number) => css`
     background-color: #00ffab;
 
     position: absolute;
-    transform: translateY(-31.5%);
 
-    width: ${gauge}%;
-    max-width: 100%;
+    width: ${gauge - 2}vw;
     height: 3rem;
 
     display: flex;
 
     border-radius: 0.5rem;
-    z-index: -1;
   }
 `;
 
