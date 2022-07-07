@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { css } from "@emotion/react";
 import theme, { ThemeProps } from "../../styles/theme";
 
@@ -52,7 +52,7 @@ const LoginModal = ({
               비밀번호
               <span>8자리 이상 , 대 · 소문자 & 특수문자 조합</span>
             </label>
-            <input id="pw" type="password" />
+            <input id="pw" type="password" autoComplete="off" />
           </div>
           <button css={() => buttonStyle(themeId)}>로그인</button>
         </form>

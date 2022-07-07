@@ -145,11 +145,11 @@ const RegisterModal = ({
               )}
             </label>
             <input
+              ref={emailRef}
               id="email"
               type=""
               autoComplete="off"
               disabled={email === "" ? false : true}
-              ref={emailRef}
             />
           </div>
           <div css={() => inputStyle(themeId)}>

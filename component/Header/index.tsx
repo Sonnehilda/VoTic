@@ -1,10 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
+
+import { useContext, useEffect, useState } from "react";
 import { css } from "@emotion/react";
+import theme, { ThemeProps } from "../../styles/theme";
+import { ThemeColorContext } from "../../context/Theme";
 import { search, user, sun, moon } from "../../public/images";
 import Router from "next/router";
-import { useContext, useEffect, useState } from "react";
-import { ThemeColorContext } from "../../context/Theme";
-import theme, { ThemeProps } from "../../styles/theme";
 
 interface HeaderProps {
   setModalState: React.Dispatch<React.SetStateAction<string>>;
@@ -55,13 +56,15 @@ const Header = ({ setModalState, themeId }: HeaderProps & ThemeProps) => {
         {dropDownState === true && (
           <div css={() => dropDownStateStyle(themeId)}>
             <button>내 정보</button>
-            <button>새 투표 만들기</button>
+            <button onClick={() => Router.push("/write")}>
+              새 투표 만들기
+            </button>
           </div>
         )}
         <div
           css={userStyle}
           onClick={() => {
-            if (!false) setModalState("login");
+            if (false) setModalState("login");
             else setDropDownState(!dropDownState);
           }}
         >

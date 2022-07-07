@@ -80,7 +80,7 @@ const PreviewList = ({
       <div css={() => titleStyle(themeId)}>
         <h4 onClick={() => Router.push(`/${type}`)}>{title} →</h4>
       </div>
-      <div css={contentsWrapper} ref={wrapperRef}>
+      <div ref={wrapperRef} css={contentsWrapper}>
         {data.map((v) => {
           return (
             <VoteCard

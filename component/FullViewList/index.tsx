@@ -18,7 +18,7 @@ const FullViewList = ({ title, type, themeId }: FullListProps & ThemeProps) => {
       <div css={() => titleStyle(themeId)}>
         <h4>{title ? title : "모든 투표"}</h4>
       </div>
-      <div css={contentsWrapper} ref={wrapperRef}>
+      <div ref={wrapperRef} css={contentsWrapper}>
         {data.map((v) => {
           return (
             <VoteCard
