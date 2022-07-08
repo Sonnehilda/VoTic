@@ -50,16 +50,8 @@ export default function Home() {
           />
         )}
 
-        <PreviewList
-          title={"인기 급상승 투표"}
-          type={"popularity"}
-          themeId={`${themeColor}0`}
-        />
-        <PreviewList
-          title={"최근에 생성된 투표"}
-          type={"recent"}
-          themeId={`${themeColor}0`}
-        />
+        <PreviewList type={"popularity"} themeId={`${themeColor}0`} />
+        <PreviewList type={"recent"} themeId={`${themeColor}0`} />
         <FullViewList themeId={`${themeColor}0`} />
       </div>
       <Footer themeId={`${themeColor}0`} />

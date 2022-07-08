@@ -2,83 +2,23 @@
 import { useRef } from "react";
 import { css } from "@emotion/react";
 import theme, { ThemeProps } from "../../styles/theme";
+import { scrollNext, scrollPrev } from "../../lib/scroll";
+import { getTitle } from "../../lib/getTitle";
+import { testCase as data } from "../../lib/testCase";
 import VoteCard from "../VoteCard";
 import Router from "next/router";
-import { testCase as data } from "./testCase";
 
 interface PreviewListProps {
-  title: string;
   type: string;
 }
 
-const PreviewList = ({
-  title,
-  type,
-  themeId,
-}: PreviewListProps & ThemeProps) => {
+const PreviewList = ({ type, themeId }: PreviewListProps & ThemeProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
-
-  const scrollNext = (refObj: React.MutableRefObject<HTMLDivElement>) => {
-    const sum: number =
-      refObj.current.scrollLeft -
-      (refObj.current.scrollWidth - refObj.current.clientWidth);
-    if (sum < 2 && sum > -2)
-      refObj.current.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth",
-      });
-    else if (
-      refObj.current.scrollLeft +
-        (refObj.current.scrollWidth - refObj.current.clientWidth) / 4 >
-      refObj.current.scrollWidth - refObj.current.clientWidth
-    )
-      refObj.current.scrollTo({
-        top: 0,
-        left: refObj.current.scrollWidth - refObj.current.clientWidth,
-        behavior: "smooth",
-      });
-    else
-      refObj.current.scrollTo({
-        top: 0,
-        left:
-          refObj.current.scrollLeft +
-          (refObj.current.scrollWidth - refObj.current.clientWidth) / 4,
-        behavior: "smooth",
-      });
-  };
-
-  const scrollPrev = (refObj: React.MutableRefObject<HTMLDivElement>) => {
-    if (refObj.current.scrollLeft === 0)
-      refObj.current.scrollTo({
-        top: 0,
-        left: refObj.current.scrollWidth - refObj.current.clientWidth,
-        behavior: "smooth",
-      });
-    else if (
-      refObj.current.scrollLeft +
-        (refObj.current.scrollWidth - refObj.current.clientWidth) / 4 <
-      0
-    )
-      refObj.current.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth",
-      });
-    else
-      refObj.current.scrollTo({
-        top: 0,
-        left:
-          refObj.current.scrollLeft -
-          (refObj.current.scrollWidth - refObj.current.clientWidth) / 4,
-        behavior: "smooth",
-      });
-  };
 
   return (
     <div css={() => backgroundStyle(themeId)}>
       <div css={() => titleStyle(themeId)}>
-        <h4 onClick={() => Router.push(`/${type}`)}>{title} →</h4>
+        <h4 onClick={() => Router.push(`/list/${type}`)}>{getTitle(type)} →</h4>
       </div>
       <div ref={wrapperRef} css={contentsWrapper}>
         {data.map((v) => {
@@ -173,6 +113,10 @@ const contentsWrapper = css`
     border-radius: 1.5rem;
     box-shadow: inset 0 0 6rem #00ffab;
   }
+
+  @media screen and (max-width: 400px) {
+    width: 98%;
+  }
 `;
 
 const scrollWrapper = css`
@@ -186,6 +130,10 @@ const scrollWrapper = css`
   justify-content: space-between;
 
   z-index: 0;
+
+  @media screen and (max-width: 400px) {
+    display: none !important;
+  }
 `;
 
 const scrollStyle = (themeId: string) => css`

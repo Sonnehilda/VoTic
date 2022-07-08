@@ -1,22 +1,24 @@
 import { useContext, useEffect, useState } from "react";
-import { css } from "@emotion/react";
-import { ThemeColorContext } from "../context/Theme";
-import Header from "../component/Header";
-import Footer from "../component/Footer";
-import LoginModal from "../component/LoginModal";
-import PolicyModal from "../component/PolicyModal";
-import RegisterModal from "../component/RegisterModal";
-import FullViewList from "../component/FullViewList";
 import { NextRouter, useRouter } from "next/router";
+import { css } from "@emotion/react";
+import { ThemeColorContext } from "../../context/Theme";
+import Header from "../../component/Header";
+import Footer from "../../component/Footer";
+import LoginModal from "../../component/LoginModal";
+import PolicyModal from "../../component/PolicyModal";
+import RegisterModal from "../../component/RegisterModal";
+import FullViewList from "../../component/FullViewList";
 
-export default function Popularity() {
+export default function Recent() {
   const [modalState, setModalState] = useState<string>("");
+  const [listType, setListType] = useState<string>(undefined);
   const { themeColor, toggleThemeColor } = useContext(ThemeColorContext);
 
   const router: NextRouter = useRouter();
 
   useEffect(() => {
     if (router.isReady) {
+      setListType(router.query.type[0]);
       if (
         localStorage.getItem("themeColor") &&
         themeColor !== localStorage.getItem("themeColor")
@@ -49,11 +51,9 @@ export default function Popularity() {
           />
         )}
 
-        <FullViewList
-          title="인기 급상승 투표"
-          type="popularity"
-          themeId={`${themeColor}0`}
-        />
+        {listType && (
+          <FullViewList type={listType} themeId={`${themeColor}0`} />
+        )}
       </div>
       <Footer themeId={`${themeColor}0`} />
     </>

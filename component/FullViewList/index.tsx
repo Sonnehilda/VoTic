@@ -2,21 +2,21 @@
 import { useRef } from "react";
 import { css } from "@emotion/react";
 import theme, { ThemeProps } from "../../styles/theme";
+import { getTitle } from "../../lib/getTitle";
+import { testCase as data } from "../../lib/testCase";
 import VoteCard from "../VoteCard";
-import { testCase as data } from "../PreviewList/testCase";
 
 interface FullListProps {
-  title?: string;
   type?: string;
 }
 
-const FullViewList = ({ title, type, themeId }: FullListProps & ThemeProps) => {
+const FullViewList = ({ type, themeId }: FullListProps & ThemeProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   return (
     <div css={() => backgroundStyle(themeId)}>
       <div css={() => titleStyle(themeId)}>
-        <h4>{title ? title : "모든 투표"}</h4>
+        <h4>{getTitle(type)}</h4>
       </div>
       <div ref={wrapperRef} css={contentsWrapper}>
         {data.map((v) => {
