@@ -2,7 +2,7 @@
 import { css } from "@emotion/react";
 import theme, { ThemeProps } from "../../styles/theme";
 import Router from "next/router";
-import { testCase } from "../PreviewList/testCase";
+import { testCase } from "../../lib/testCase";
 
 interface VoteViewProps {
   voteId: number;

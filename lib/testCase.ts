@@ -1,4 +1,4 @@
-import { VoteValueType } from "../../types/voteValue";
+import { VoteValueType } from "../types/voteValue";
 
 export const testCase: VoteValueType[] = [
   {

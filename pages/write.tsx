@@ -1,15 +1,15 @@
 import { useContext, useEffect, useRef, useState } from "react";
+import { NextRouter, useRouter } from "next/router";
 import { css } from "@emotion/react";
 import { ThemeColorContext } from "../context/Theme";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
+import AdviseModal from "../component/AdviseModal";
 import LoginModal from "../component/LoginModal";
 import PolicyModal from "../component/PolicyModal";
 import RegisterModal from "../component/RegisterModal";
-import { NextRouter, useRouter } from "next/router";
 import WriteVote from "../component/WriteVote";
 import CreateOption from "../component/CreateOption";
-import AdviseModal from "../component/AdviseModal";
 
 export default function Write() {
   const titleRef = useRef<HTMLInputElement>(null);

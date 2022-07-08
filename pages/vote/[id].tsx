@@ -4,10 +4,10 @@ import { NextRouter, useRouter } from "next/router";
 import { css } from "@emotion/react";
 import { ThemeColorContext } from "../../context/Theme";
 import Header from "../../component/Header";
+import Footer from "../../component/Footer";
 import LoginModal from "../../component/LoginModal";
 import PolicyModal from "../../component/PolicyModal";
 import RegisterModal from "../../component/RegisterModal";
-import Footer from "../../component/Footer";
 import VoteView from "../../component/VoteView";
 import Vote from "../../component/Vote";
 
