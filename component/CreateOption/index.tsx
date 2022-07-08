@@ -2,15 +2,15 @@
 import { MutableRefObject, useRef, useState } from "react";
 import { css } from "@emotion/react";
 import theme, { ThemeProps } from "../../styles/theme";
-import Options from "../Option";
 import {
-  OptionAlreadyExistException,
-  OptionNotExistException,
+  ValueNotExistException,
+  OptionAlreadyExistsException,
   OptionNotFulfilledException,
   SucceededMessage,
   TitleNotExistException,
-} from "./constant";
+} from "../../lib/constants";
 import Router from "next/router";
+import Options from "../Option";
 
 interface WriteVoteProps {
   titleRef: MutableRefObject<HTMLInputElement>;
@@ -31,9 +31,9 @@ const CreateOption = ({ titleRef, themeId }: WriteVoteProps & ThemeProps) => {
       setOptions([...options, optionRef.current.value]);
       optionRef.current.value = "";
     } else if (optionRef.current && optionRef.current.value.length <= 0) {
-      alert(OptionNotExistException);
+      alert(ValueNotExistException);
     } else if (optionRef.current && options.includes(optionRef.current.value)) {
-      alert(OptionAlreadyExistException);
+      alert(OptionAlreadyExistsException);
     }
     optionRef.current?.focus();
   };

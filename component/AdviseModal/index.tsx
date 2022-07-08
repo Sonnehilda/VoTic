@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { css } from "@emotion/react";
 import theme, { ThemeProps } from "../../styles/theme";
-import { discretion } from "./constant";
+import { iAgree, termsOfUseDiscretion } from "../../lib/constants";
 
 interface AdviseModalProps {
   setModalState: React.Dispatch<React.SetStateAction<string>>;
@@ -22,22 +22,22 @@ const AdviseModal = ({
           <h1>이용 약관</h1>
         </div>
         <div css={phraseWrapper}>
-          <p>{discretion[0]}</p>
-          <p>{discretion[1]}</p>
-          <p>{discretion[2]}</p>
+          <p>{termsOfUseDiscretion[0]}</p>
+          <p>{termsOfUseDiscretion[1]}</p>
+          <p>{termsOfUseDiscretion[2]}</p>
           <br />
-          <p>{discretion[3]}</p>
-          <p>{discretion[4]}</p>
+          <p>{termsOfUseDiscretion[3]}</p>
+          <p>{termsOfUseDiscretion[4]}</p>
           <br />
-          <p>{discretion[5]}</p>
+          <p>{termsOfUseDiscretion[5]}</p>
           <br />
-          <p>{discretion[6]}</p>
-          <p>{discretion[7]}</p>
+          <p>{termsOfUseDiscretion[6]}</p>
+          <p>{termsOfUseDiscretion[7]}</p>
           <br />
-          <p>{discretion[8]}</p>
+          <p>{termsOfUseDiscretion[8]}</p>
           <br />
-          <p>{discretion[9]}</p>
-          <p>{discretion[10]}</p>
+          <p>{termsOfUseDiscretion[9]}</p>
+          <p>{termsOfUseDiscretion[10]}</p>
         </div>
 
         <div css={checkboxWrapper}>
@@ -49,7 +49,7 @@ const AdviseModal = ({
             }}
           />
           <label css={labelStyle} htmlFor="checkbox">
-            위의 사항을 숙지했으며, 이에 동의합니다.
+            {iAgree}
           </label>
         </div>
         <button

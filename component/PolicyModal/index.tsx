@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { css } from "@emotion/react";
 import theme, { ThemeProps } from "../../styles/theme";
-import { discretion, purpose } from "./constant";
+import { iAgree, privacyPolicyDiscretion, purpose } from "../../lib/constants";
 
 interface PolicyModalProps {
   setModalState: React.Dispatch<React.SetStateAction<string>>;
@@ -54,14 +54,14 @@ const PolicyModal = ({
         </div>
 
         <div css={phraseWrapper}>
-          <p>{discretion[0]}</p>
-          <p>{discretion[1]}</p>
+          <p>{privacyPolicyDiscretion[0]}</p>
+          <p>{privacyPolicyDiscretion[1]}</p>
           <br />
-          <p>{discretion[2]}</p>
-          <p>{discretion[3]}</p>
+          <p>{privacyPolicyDiscretion[2]}</p>
+          <p>{privacyPolicyDiscretion[3]}</p>
           <br />
-          <p>{discretion[4]}</p>
-          <p>{discretion[5]}</p>
+          <p>{privacyPolicyDiscretion[4]}</p>
+          <p>{privacyPolicyDiscretion[5]}</p>
         </div>
 
         <div css={checkboxWrapper}>
@@ -73,7 +73,7 @@ const PolicyModal = ({
             }}
           />
           <label css={labelStyle} htmlFor="checkbox">
-            위 개인정보 수집 및 이용에 동의합니다.
+            {iAgree}
           </label>
         </div>
         <button

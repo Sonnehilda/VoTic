@@ -1,6 +1,15 @@
 import { useRef, useState } from "react";
 import { css } from "@emotion/react";
 import theme, { ThemeProps } from "../../styles/theme";
+import {
+  IdHasTakenException,
+  EmailHasTakenException,
+  GeneralException,
+  PwDoesNotMatchException,
+  ValueNotExistException,
+  VerifyCodeDoesNotMatchException,
+  WrongEmailFormException,
+} from "../../lib/constants";
 
 interface RegisterModalProps {
   setModalState: React.Dispatch<React.SetStateAction<string>>;
@@ -56,7 +65,7 @@ const RegisterModal = ({
         return false;
       }
     } else {
-      alert("값이 입력되지 않은 부분이 있습니다.");
+      alert(ValueNotExistException);
       return false;
     }
   };
@@ -95,7 +104,7 @@ const RegisterModal = ({
           <div css={() => inputStyle(themeId)}>
             <label htmlFor="id">
               아이디
-              {false && <strong>사용할 수 없는 아이디입니다.</strong>}
+              {false && <strong>{IdHasTakenException}</strong>}
             </label>
             <input id="id" type="id" autoComplete="off" />
           </div>
@@ -125,9 +134,7 @@ const RegisterModal = ({
           <div css={() => inputStyle(themeId)}>
             <label htmlFor="checkpw">
               비밀번호 확인
-              {pwWarning === 4 && (
-                <strong>비밀번호가 일치하지 않습니다.</strong>
-              )}
+              {pwWarning === 4 && <strong>{PwDoesNotMatchException}</strong>}
             </label>
             <input id="checkpw" type="password" autoComplete="off" />
           </div>
@@ -135,13 +142,11 @@ const RegisterModal = ({
             <label htmlFor="email">
               이메일
               {emailWarning === 1 ? (
-                <strong>이메일 형식이 올바르지 않습니다.</strong>
+                <strong>{WrongEmailFormException}</strong>
               ) : emailWarning === 2 ? (
-                <strong>해당 이메일로 가입된 회원이 존재합니다.</strong>
+                <strong>{EmailHasTakenException}</strong>
               ) : (
-                emailWarning === 3 && (
-                  <strong>알 수 없는 오류가 발생하였습니다.</strong>
-                )
+                emailWarning === 3 && <strong>{GeneralException}</strong>
               )}
             </label>
             <input
@@ -155,7 +160,7 @@ const RegisterModal = ({
           <div css={() => inputStyle(themeId)}>
             <label htmlFor="verify">
               이메일 인증 코드
-              {false && <strong>코드가 올바르지 않습니다.</strong>}
+              {false && <strong>{VerifyCodeDoesNotMatchException}</strong>}
             </label>
             <input id="verify" autoComplete="off" />
             {email === "" ? (
