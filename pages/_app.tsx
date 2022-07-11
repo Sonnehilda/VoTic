@@ -1,3 +1,4 @@
+import "../styles/font.css";
 import { Global, ThemeProvider } from "@emotion/react";
 import { GlobalStyle } from "../styles/global";
 import { ThemeColorProvider } from "../context/Theme";
