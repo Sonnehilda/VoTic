@@ -61,6 +61,7 @@ const backgroundStyle = (themeId: string) => css`
 
   margin: 0 auto;
   margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   padding-left: 1%;
   padding-right: 1%;
 

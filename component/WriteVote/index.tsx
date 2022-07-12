@@ -132,6 +132,7 @@ const imgInput = (themeId: string, previewImg?: string | ArrayBuffer) => css`
       width: 98%;
       height: 15rem;
 
+      transition: filter 0.25s ease;
       content: "";
 
       ${previewImg === "" && themeId === "light0"
@@ -154,7 +155,7 @@ const imgInput = (themeId: string, previewImg?: string | ArrayBuffer) => css`
     text-align: center;
     ${previewImg && "font-size: 0;"}
 
-    transition: background-color 0.25s ease, backdrop-filter 0.25s ease;
+    transition: background-color 0.25s ease;
     cursor: pointer;
 
     :hover {

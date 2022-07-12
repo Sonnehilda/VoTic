@@ -12,6 +12,7 @@ import FullViewList from "../../component/FullViewList";
 export default function Recent() {
   const [modalState, setModalState] = useState<string>("");
   const [listType, setListType] = useState<string>(undefined);
+  
   const { themeColor, toggleThemeColor } = useContext(ThemeColorContext);
 
   const router: NextRouter = useRouter();

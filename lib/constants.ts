@@ -3,6 +3,7 @@
 export const nameOfPopularityList = "인기 급상승 투표";
 export const nameOfRecentList = "최근에 생성된 투표";
 export const nameOfMineList = "당신이 생성한 투표";
+export const nameOfSearchedList = "에 대한 검색 결과";
 export const nameOfDefaultList = "모든 투표";
 
 // CreateOption Component & Register Modal Component.
@@ -13,7 +14,7 @@ export const TitleNotExistException: string =
 export const OptionAlreadyExistsException: string =
   "이미 해당 선택지가 존재합니다!";
 export const OptionNotFulfilledException: string =
-  "선택지를 최소 2개 만들어주세요!";
+  "선택지를 최소 2개 이상 만들어주세요!";
 export const SucceededMessage: string = "투표가 성공적으로 생성되었습니다!";
 
 // Register Modal Component.

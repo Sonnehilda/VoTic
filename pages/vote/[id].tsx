@@ -14,6 +14,7 @@ import Vote from "../../component/Vote";
 export default function Home() {
   const [modalState, setModalState] = useState<string>("");
   const [voteId, setVoteId] = useState<number>(undefined);
+
   const { themeColor, toggleThemeColor } = useContext(ThemeColorContext);
 
   const router: NextRouter = useRouter();

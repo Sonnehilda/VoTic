@@ -12,6 +12,7 @@ import FullViewList from "../component/FullViewList";
 
 export default function Home() {
   const [modalState, setModalState] = useState<string>("");
+
   const { themeColor, toggleThemeColor } = useContext(ThemeColorContext);
 
   const router: NextRouter = useRouter();

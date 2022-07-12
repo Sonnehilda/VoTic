@@ -1,11 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { useContext, useEffect, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import { css } from "@emotion/react";
 import theme, { ThemeProps } from "../../styles/theme";
 import { ThemeColorContext } from "../../context/Theme";
+import { UserContext } from "../../context/UserData";
 import { search, user, sun, moon } from "../../public/images";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 
 interface HeaderProps {
   setModalState: React.Dispatch<React.SetStateAction<string>>;
@@ -16,6 +17,9 @@ const Header = ({ setModalState, themeId }: HeaderProps & ThemeProps) => {
   const [hideHeaderState, setHideHeaderState] = useState<boolean>(false);
 
   const { themeColor, toggleThemeColor } = useContext(ThemeColorContext);
+  const { username, pfp } = useContext(UserContext);
+
+  const router = useRouter();
 
   useEffect(() => {
     let prevScrollTop = 0;
@@ -48,14 +52,24 @@ const Header = ({ setModalState, themeId }: HeaderProps & ThemeProps) => {
           <span>{themeColor === "light" ? "라이트 모드" : "다크 모드"}</span>
         </div>
       </div>
-      <form>
+      <form
+        onSubmit={(e: FormEvent<HTMLFormElement>) => {
+          e.preventDefault();
+          router.push({
+            pathname: "/search",
+            query: {
+              q: e.target[0].value,
+            },
+          });
+        }}
+      >
         <input css={inputStyle} type="text" placeholder="검색" />
         <img css={inputIcon} src={`${search.src}`} alt="" />
       </form>
       <div>
         {dropDownState === true && (
           <div css={() => dropDownStateStyle(themeId)}>
-            <button>내 정보</button>
+            <button onClick={() => Router.push("/mypage")}>내 정보</button>
             <button onClick={() => Router.push("/write")}>
               새 투표 만들기
             </button>
@@ -64,16 +78,16 @@ const Header = ({ setModalState, themeId }: HeaderProps & ThemeProps) => {
         <div
           css={userStyle}
           onClick={() => {
-            if (!false) setModalState("login");
+            if (username === "") setModalState("login");
             else setDropDownState(!dropDownState);
           }}
         >
-          {false ? (
-            <span>로그인</span>
-          ) : (
-            <span>{"SonnehildaSonnehildaSonnehilda"}</span>
-          )}
-          <img css={userIcon} src={`${user.src}`} alt="User Icon" />
+          {username === "" ? <span>로그인</span> : <span>{username}</span>}
+          <img
+            css={() => userIcon(pfp)}
+            src={`${pfp ? pfp : user.src}`}
+            alt="User Icon"
+          />
         </div>
       </div>
     </header>
@@ -220,7 +234,7 @@ const userStyle = css`
   span {
     padding-right: 0.5rem;
 
-    width: 50%;
+    width: 10rem;
 
     color: #fff;
     font-size: 0.75rem;
@@ -237,8 +251,8 @@ const userStyle = css`
   }
 `;
 
-const userIcon = css`
-  padding: 0.1rem;
+const userIcon = (pfp?: string | ArrayBuffer) => css`
+  ${pfp === "" && "padding: 0.1rem;"}
   margin-top: 0.15rem;
 
   width: 1.5rem;

@@ -15,6 +15,7 @@ export default function Write() {
   const titleRef = useRef<HTMLInputElement>(null);
 
   const [modalState, setModalState] = useState<string>("");
+
   const { themeColor, toggleThemeColor } = useContext(ThemeColorContext);
 
   const router: NextRouter = useRouter();
