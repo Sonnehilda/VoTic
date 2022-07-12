@@ -2,8 +2,8 @@
 import { css } from "@emotion/react";
 import theme, { ThemeProps } from "../../styles/theme";
 import { vote } from "../../public/images";
-import Router from "next/router";
 import { VoteValueType } from "../../types/voteValue";
+import { useRouter } from "next/router";
 
 interface VoteCardProps {
   size?: string;
@@ -19,10 +19,12 @@ const VoteCard = ({
   size,
   themeId,
 }: VoteValueType & VoteCardProps & ThemeProps) => {
+  const router = useRouter();
+
   return (
     <div
       css={() => backgroundStyle(themeId, size)}
-      onClick={() => Router.push(`/vote/${index}`)}
+      onClick={() => router.push(`/vote/${index}`)}
     >
       <img css={contentImage} src={image} alt="image" />
       <div css={contentInfo}>

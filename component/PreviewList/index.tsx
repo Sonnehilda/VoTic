@@ -6,7 +6,7 @@ import { scrollNext, scrollPrev } from "../../lib/scroll";
 import { getTitle } from "../../lib/getTitle";
 import { testCase as data } from "../../lib/testCase";
 import VoteCard from "../VoteCard";
-import Router from "next/router";
+import { useRouter } from "next/router";
 
 interface PreviewListProps {
   type: string;
@@ -15,10 +15,12 @@ interface PreviewListProps {
 const PreviewList = ({ type, themeId }: PreviewListProps & ThemeProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
+  const router = useRouter();
+
   return (
     <div css={() => backgroundStyle(themeId)}>
       <div css={() => titleStyle(themeId)}>
-        <h4 onClick={() => Router.push(`/list/${type}`)}>{getTitle(type)} →</h4>
+        <h4 onClick={() => router.push(`/list/${type}`)}>{getTitle(type)} →</h4>
       </div>
       <div ref={wrapperRef} css={contentsWrapper}>
         {data.map((v) => {

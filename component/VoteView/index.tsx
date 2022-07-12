@@ -1,17 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
 import { css } from "@emotion/react";
 import theme, { ThemeProps } from "../../styles/theme";
-import Router from "next/router";
 import { testCase } from "../../lib/testCase";
+import { useRouter } from "next/router";
 
 interface VoteViewProps {
   voteId: number;
 }
 
 const VoteView = ({ voteId, themeId }: VoteViewProps & ThemeProps) => {
+  const router = useRouter();
+  
   return (
     <div css={() => backgroundStyle(themeId)}>
-      <span css={leaveStyle} onClick={() => Router.push("/")}>
+      <span css={leaveStyle} onClick={() => router.push("/")}>
         ← 홈페이지로 돌아가기
       </span>
       <div css={() => infoWrapper(themeId)}>

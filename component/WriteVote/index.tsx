@@ -3,7 +3,7 @@ import { MutableRefObject, useRef, useState } from "react";
 import { css } from "@emotion/react";
 import theme, { ThemeProps } from "../../styles/theme";
 import { upload } from "../../public/images";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 
 interface WriteVoteProps {
   titleRef: MutableRefObject<HTMLInputElement>;
@@ -13,6 +13,8 @@ const WriteVote = ({ titleRef, themeId }: WriteVoteProps & ThemeProps) => {
   const fileRef = useRef<HTMLInputElement>(null);
 
   const [previewImage, setPreviewImage] = useState<string | ArrayBuffer>("");
+
+  const router = useRouter();
 
   const readFile = () => {
     const fReader = new FileReader();
@@ -30,7 +32,7 @@ const WriteVote = ({ titleRef, themeId }: WriteVoteProps & ThemeProps) => {
 
   return (
     <div css={() => backgroundStyle(themeId)}>
-      <span css={leaveStyle} onClick={() => Router.push("/")}>
+      <span css={leaveStyle} onClick={() => router.push("/")}>
         ← 홈페이지로 돌아가기
       </span>
       <div css={() => regInput(themeId)}>

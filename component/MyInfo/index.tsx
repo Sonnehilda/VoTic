@@ -4,7 +4,7 @@ import { css } from "@emotion/react";
 import theme, { ThemeProps } from "../../styles/theme";
 import { UserContext } from "../../context/UserData";
 import { check, pencil, user } from "../../public/images";
-import Router from "next/router";
+import { useRouter } from "next/router";
 
 const MyInfo = ({ themeId }: ThemeProps) => {
   const nameInputRef = useRef<HTMLInputElement>(null);
@@ -13,6 +13,8 @@ const MyInfo = ({ themeId }: ThemeProps) => {
   const [editState, setEditState] = useState<boolean>(false);
 
   const { username, changeUsername, pfp, changePfp } = useContext(UserContext);
+
+  const router = useRouter();
 
   const readFile = () => {
     const fReader = new FileReader();
@@ -30,7 +32,7 @@ const MyInfo = ({ themeId }: ThemeProps) => {
 
   return (
     <div css={() => backgroundStyle(themeId)}>
-      <span css={leaveStyle} onClick={() => Router.push("/")}>
+      <span css={leaveStyle} onClick={() => router.push("/")}>
         ← 홈페이지로 돌아가기
       </span>
       <div css={() => imgInput(themeId, pfp)}>

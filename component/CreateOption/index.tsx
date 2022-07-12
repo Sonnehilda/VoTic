@@ -9,8 +9,8 @@ import {
   SucceededMessage,
   TitleNotExistException,
 } from "../../lib/constants";
-import Router from "next/router";
 import Options from "../Option";
+import { useRouter } from "next/router";
 
 interface WriteVoteProps {
   titleRef: MutableRefObject<HTMLInputElement>;
@@ -20,6 +20,8 @@ const CreateOption = ({ titleRef, themeId }: WriteVoteProps & ThemeProps) => {
   const optionRef = useRef<HTMLInputElement>(null);
 
   const [options, setOptions] = useState<string[]>([]);
+
+  const router = useRouter();
 
   const createOption = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -45,7 +47,7 @@ const CreateOption = ({ titleRef, themeId }: WriteVoteProps & ThemeProps) => {
       alert(OptionNotFulfilledException);
     } else if (titleRef.current) {
       alert(SucceededMessage);
-      Router.push("/");
+      router.push("/");
     }
   };
 

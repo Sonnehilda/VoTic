@@ -41,9 +41,9 @@ const Header = ({ setModalState, themeId }: HeaderProps & ThemeProps) => {
   return (
     <header css={() => backgroundStyle(hideHeaderState)}>
       <div>
-        <div css={linkStyle} onClick={() => Router.push("/")}>
+        <h1 css={linkStyle} onClick={() => Router.push("/")}>
           <span>V</span>o<span>T</span>ic
-        </div>
+        </h1>
         <div css={themeColorIcon} onClick={() => toggleThemeColor()}>
           <img
             src={`${themeColor === "light" ? sun.src : moon.src}`}
