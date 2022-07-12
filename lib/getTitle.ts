@@ -5,6 +5,7 @@ import {
   nameOfMineList,
   nameOfPopularityList,
   nameOfRecentList,
+  nameOfSearchedList,
 } from "./constants";
 
 export const getTitle = (type: string) => {
@@ -18,6 +19,8 @@ export const getTitle = (type: string) => {
     case "mine":
     case "m":
       return nameOfMineList;
+    case "/search":
+      return nameOfSearchedList;
     default:
       return nameOfDefaultList;
   }

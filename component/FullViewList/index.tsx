@@ -8,15 +8,18 @@ import VoteCard from "../VoteCard";
 
 interface FullListProps {
   type?: string;
+  q?: string;
 }
 
-const FullViewList = ({ type, themeId }: FullListProps & ThemeProps) => {
+const FullViewList = ({ type, q, themeId }: FullListProps & ThemeProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   return (
     <div css={() => backgroundStyle(themeId)}>
       <div css={() => titleStyle(themeId)}>
-        <h4>{getTitle(type)}</h4>
+        <h4>
+          {q && q} {getTitle(type)}
+        </h4>
       </div>
       <div ref={wrapperRef} css={contentsWrapper}>
         {data.map((v) => {
