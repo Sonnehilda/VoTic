@@ -234,7 +234,7 @@ const userStyle = css`
   span {
     padding-right: 0.5rem;
 
-    width: 10rem;
+    max-width: 8rem;
 
     color: #fff;
     font-size: 0.75rem;
@@ -245,7 +245,7 @@ const userStyle = css`
 
     overflow: hidden;
 
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 600px) {
       display: none !important;
     }
   }

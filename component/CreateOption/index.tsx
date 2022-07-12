@@ -46,8 +46,8 @@ const CreateOption = ({ titleRef, themeId }: WriteVoteProps & ThemeProps) => {
     } else if (options.length < 2) {
       alert(OptionNotFulfilledException);
     } else if (titleRef.current) {
-      alert(SucceededMessage);
       router.push("/");
+      alert(SucceededMessage);
     }
   };
 

@@ -54,7 +54,11 @@ const MyInfo = ({ themeId }: ThemeProps) => {
               setEditState(!editState);
             }}
           >
-            <input ref={nameInputRef} placeholder="새로운 닉네임" />
+            <input
+              ref={nameInputRef}
+              placeholder="새로운 닉네임"
+              defaultValue={username}
+            />
           </form>
         ) : (
           <span>{username}</span>
@@ -66,6 +70,11 @@ const MyInfo = ({ themeId }: ThemeProps) => {
             if (editState && nameInputRef.current.value != "")
               changeUsername(nameInputRef.current.value);
             setEditState(!editState);
+            if (!nameInputRef.current) {
+              setTimeout(() => {
+                nameInputRef.current.focus();
+              });
+            }
           }}
         >
           <img src={editState ? check.src : pencil.src} alt="editImage" />
