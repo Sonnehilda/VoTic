@@ -9,6 +9,7 @@ import PolicyModal from "../component/PolicyModal";
 import RegisterModal from "../component/RegisterModal";
 import PreviewList from "../component/PreviewList";
 import FullViewList from "../component/FullViewList";
+import Banner from "../component/Banner";
 
 export default function Home() {
   const [modalState, setModalState] = useState<string>("");
@@ -50,6 +51,8 @@ export default function Home() {
             themeId={`${themeColor}0`}
           />
         )}
+
+        <Banner setModalState={setModalState} themeId={`${themeColor}0`} />
 
         <PreviewList type={"popularity"} themeId={`${themeColor}0`} />
         <PreviewList type={"recent"} themeId={`${themeColor}0`} />
