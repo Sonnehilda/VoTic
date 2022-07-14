@@ -1,19 +1,15 @@
-/* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
 import { css } from "@emotion/react";
 import theme, { ThemeProps } from "../../styles/theme";
-import { VoteValueType } from "../../types/voteValue";
 import { useRef } from "react";
+import { testCase } from "../../lib/testCase";
 
-const Vote = ({ themeId }: ThemeProps) => {
-  const data: VoteValueType[] = [
-    { key: 0, title: "백색시유", status: 1368710 },
-    { key: 1, title: "바나나 우유", status: 216866 },
-    { key: 2, title: "초코 우유", status: 223932 },
-    { key: 3, title: "커피 우유", status: 121736 },
-    { key: 4, title: "딸기 우유", status: 86771 },
-  ];
+interface VoteProps {
+  voteId: number;
+}
 
+const Vote = ({ voteId, themeId }: VoteProps & ThemeProps) => {
+  const data = testCase[voteId].options;
   const scrollRef = useRef<HTMLSpanElement[]>([]);
   const modeRef = useRef<boolean[] | number[]>([false]);
   const tempRef = useRef<boolean | number>(false);

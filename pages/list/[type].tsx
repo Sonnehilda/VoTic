@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { NextRouter, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { css } from "@emotion/react";
 import { ThemeColorContext } from "../../context/Theme";
 import Header from "../../component/Header";
@@ -12,10 +12,10 @@ import FullViewList from "../../component/FullViewList";
 export default function Recent() {
   const [modalState, setModalState] = useState<string>("");
   const [listType, setListType] = useState<string>(undefined);
-  
+
   const { themeColor, toggleThemeColor } = useContext(ThemeColorContext);
 
-  const router: NextRouter = useRouter();
+  const router = useRouter();
 
   useEffect(() => {
     if (router.isReady) {

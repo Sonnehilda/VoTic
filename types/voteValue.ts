@@ -1,3 +1,9 @@
+export type OptionType = {
+  key: number;
+  title: string;
+  status: number;
+};
+
 export type VoteValueType = {
   index?: number;
   key: number;
@@ -6,4 +12,5 @@ export type VoteValueType = {
   status: number;
   creator?: string;
   image?: string;
+  options?: OptionType[];
 };

@@ -10,7 +10,7 @@ interface VoteViewProps {
 
 const VoteView = ({ voteId, themeId }: VoteViewProps & ThemeProps) => {
   const router = useRouter();
-  
+
   return (
     <div css={() => backgroundStyle(themeId)}>
       <span css={leaveStyle} onClick={() => router.push("/")}>
@@ -89,8 +89,6 @@ const contentInfo = css`
   }
 
   span {
-    width: 5.4rem;
-
     color: #a1a1a1;
     font-size: 0.9rem;
     font-weight: 300;

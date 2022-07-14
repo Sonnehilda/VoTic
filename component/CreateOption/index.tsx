@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { MutableRefObject, useRef, useState } from "react";
 import { css } from "@emotion/react";
 import theme, { ThemeProps } from "../../styles/theme";

@@ -6,7 +6,7 @@ import theme, { ThemeProps } from "../../styles/theme";
 import { ThemeColorContext } from "../../context/Theme";
 import { UserContext } from "../../context/UserData";
 import { search, user, sun, moon } from "../../public/images";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 interface HeaderProps {
   setModalState: React.Dispatch<React.SetStateAction<string>>;
@@ -41,7 +41,7 @@ const Header = ({ setModalState, themeId }: HeaderProps & ThemeProps) => {
   return (
     <header css={() => backgroundStyle(hideHeaderState)}>
       <div>
-        <h1 css={linkStyle} onClick={() => Router.push("/")}>
+        <h1 css={linkStyle} onClick={() => router.push("/")}>
           <span>V</span>o<span>T</span>ic
         </h1>
         <div css={themeColorIcon} onClick={() => toggleThemeColor()}>
@@ -69,8 +69,8 @@ const Header = ({ setModalState, themeId }: HeaderProps & ThemeProps) => {
       <div>
         {dropDownState === true && (
           <div css={() => dropDownStateStyle(themeId)}>
-            <button onClick={() => Router.push("/mypage")}>내 정보</button>
-            <button onClick={() => Router.push("/write")}>
+            <button onClick={() => router.push("/mypage")}>내 정보</button>
+            <button onClick={() => router.push("/write")}>
               새 투표 만들기
             </button>
           </div>

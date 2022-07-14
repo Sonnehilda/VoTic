@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { css } from "@emotion/react";
 import { useRouter } from "next/router";
 import { useContext } from "react";
@@ -78,7 +77,7 @@ const backgroundStyle = (themeId: string) => css`
     width: 32.5rem;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
   }
 `;
 
@@ -88,11 +87,12 @@ const buttonStyle = (themeId: string) => css`
   background-color: ${theme[themeId.replace("0", "1")].background};
 
   padding: 0.25rem;
-  margin: 0 auto;
   margin-top: 0.5rem;
   margin-bottom: 0.25rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 
-  width: 12.5rem;
+  width: 25%;
   height: 2rem;
 
   display: flex;

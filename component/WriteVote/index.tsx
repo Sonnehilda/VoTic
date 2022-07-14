@@ -1,9 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
 import { MutableRefObject, useRef, useState } from "react";
 import { css } from "@emotion/react";
 import theme, { ThemeProps } from "../../styles/theme";
 import { upload } from "../../public/images";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 interface WriteVoteProps {
   titleRef: MutableRefObject<HTMLInputElement>;

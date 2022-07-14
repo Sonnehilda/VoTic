@@ -8,11 +8,10 @@ export const nameOfDefaultList = "모든 투표";
 
 // CreateOption Component & Register Modal Component.
 
-export const ValueNotExistException: string = "값이 입력되지 않았습니다!";
-export const TitleNotExistException: string =
-  "투표 제목이 입력되지 않았습니다!";
+export const ValueNotExistException: string = "값을 입력해주세요!";
+export const TitleNotExistException: string = "투표 제목을 입력해주세요!";
 export const OptionAlreadyExistsException: string =
-  "이미 해당 선택지가 존재합니다!";
+  "해당 선택지가 이미 존재합니다!";
 export const OptionNotFulfilledException: string =
   "선택지를 최소 2개 이상 만들어주세요!";
 export const SucceededMessage: string = "투표가 성공적으로 생성되었습니다!";
@@ -24,10 +23,9 @@ export const PwDoesNotMatchException: string = "비밀번호가 일치하지 않
 export const WrongEmailFormException: string =
   "이메일 형식이 올바르지 않습니다.";
 export const EmailHasTakenException: string =
-  "해당 이메일로 가입된 회원이 존재합니다.";
+  "해당 이메일로 이미 가입된 회원이 존재합니다.";
 export const GeneralException: string = "알 수 없는 오류가 발생하였습니다.";
-export const VerifyCodeDoesNotMatchException: string =
-  "인증 코드가 올바르지 않습니다.";
+export const VerifyCodeDoesNotMatchException: string = "인증 코드가 틀립니다.";
 
 // Policy Modal Component & Advise Modal Component.
 

@@ -19,7 +19,7 @@ const LoginModal = ({
     ) {
       return true;
     } else {
-      alert("아이디 또는 비밀번호를 확인해주세요.");
+      alert("아이디 또는 비밀번호가 틀립니다.");
       return false;
     }
   };

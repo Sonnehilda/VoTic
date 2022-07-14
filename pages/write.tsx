@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { NextRouter, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { css } from "@emotion/react";
 import { ThemeColorContext } from "../context/Theme";
 import Header from "../component/Header";
@@ -18,7 +18,7 @@ export default function Write() {
 
   const { themeColor, toggleThemeColor } = useContext(ThemeColorContext);
 
-  const router: NextRouter = useRouter();
+  const router = useRouter();
 
   useEffect(() => {
     if (router.isReady) {
